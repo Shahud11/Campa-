@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>CAMPA</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+}
 
 :root{
  --purple:#6b20c9;
@@ -24,8 +29,14 @@ body{
  color:var(--dark);
 }
 
-button,input{font:inherit}
-button{border:0;cursor:pointer}
+button,input{
+ font:inherit;
+}
+
+button{
+ border:0;
+ cursor:pointer;
+}
 
 .app{
  width:100%;
@@ -35,8 +46,6 @@ button{border:0;cursor:pointer}
  background:var(--bg);
  padding-bottom:85px;
 }
-
-/* AUTH */
 
 .auth{
  min-height:100vh;
@@ -146,8 +155,6 @@ button{border:0;cursor:pointer}
  margin-top:15px;
 }
 
-/* HEADER */
-
 .header{
  background:#fff;
  padding:17px 18px 13px;
@@ -193,8 +200,6 @@ button{border:0;cursor:pointer}
  font-size:20px;
 }
 
-/* PAGE */
-
 .page{
  display:none;
  padding:15px 17px;
@@ -203,8 +208,6 @@ button{border:0;cursor:pointer}
 .page.active{
  display:block;
 }
-
-/* HERO */
 
 .hero{
  position:relative;
@@ -257,8 +260,6 @@ button{border:0;cursor:pointer}
  font-weight:bold;
 }
 
-/* STATS */
-
 .stats{
  display:grid;
  grid-template-columns:repeat(3,1fr);
@@ -274,7 +275,9 @@ button{border:0;cursor:pointer}
  text-align:center;
 }
 
-.stat-icon{font-size:19px}
+.stat-icon{
+ font-size:19px;
+}
 
 .stat strong{
  display:block;
@@ -289,8 +292,6 @@ button{border:0;cursor:pointer}
  margin-top:3px;
 }
 
-/* SECTION */
-
 .section-head{
  display:flex;
  justify-content:space-between;
@@ -298,7 +299,9 @@ button{border:0;cursor:pointer}
  margin:22px 2px 10px;
 }
 
-.section-head h2{font-size:18px}
+.section-head h2{
+ font-size:18px;
+}
 
 .section-head button{
  background:none;
@@ -306,8 +309,6 @@ button{border:0;cursor:pointer}
  font-size:11px;
  font-weight:bold;
 }
-
-/* QUICK */
 
 .grid{
  display:grid;
@@ -347,8 +348,6 @@ button{border:0;cursor:pointer}
  font-size:11px;
  font-weight:bold;
 }
-
-/* FEATURE */
 
 .feature{
  position:relative;
@@ -401,8 +400,6 @@ button{border:0;cursor:pointer}
  opacity:.85;
 }
 
-/* ACTIVITY */
-
 .activity{
  background:#fff;
  border:1px solid var(--line);
@@ -418,7 +415,9 @@ button{border:0;cursor:pointer}
  border-bottom:1px solid #f0edf4;
 }
 
-.activity-row:last-child{border-bottom:0}
+.activity-row:last-child{
+ border-bottom:0;
+}
 
 .act-icon{
  width:39px;
@@ -429,7 +428,9 @@ button{border:0;cursor:pointer}
  place-items:center;
 }
 
-.act-info{flex:1}
+.act-info{
+ flex:1;
+}
 
 .act-info strong{
  display:block;
@@ -454,10 +455,7 @@ button{border:0;cursor:pointer}
  font-size:12px;
  font-weight:bold;
 }
-
-/* REFERRAL */
-
-.referral{
+ .referral{
  position:relative;
  overflow:hidden;
  margin-top:16px;
@@ -467,7 +465,9 @@ button{border:0;cursor:pointer}
  border:1px solid #dfd1f3;
 }
 
-.referral h3{font-size:17px}
+.referral h3{
+ font-size:17px;
+}
 
 .referral p{
  width:72%;
@@ -486,8 +486,6 @@ button{border:0;cursor:pointer}
  font-weight:bold;
 }
 
-/* INNER */
-
 .back{
  background:none;
  color:var(--purple);
@@ -496,7 +494,9 @@ button{border:0;cursor:pointer}
  margin-bottom:13px;
 }
 
-.title{font-size:27px}
+.title{
+ font-size:27px;
+}
 
 .subtitle{
  color:#918a9a;
@@ -504,8 +504,6 @@ button{border:0;cursor:pointer}
  margin-top:4px;
  margin-bottom:17px;
 }
-
-/* PLAN */
 
 .plan{
  position:relative;
@@ -522,7 +520,9 @@ button{border:0;cursor:pointer}
  justify-content:space-between;
 }
 
-.plan h3{font-size:16px}
+.plan h3{
+ font-size:16px;
+}
 
 .price{
  color:var(--purple);
@@ -545,8 +545,6 @@ button{border:0;cursor:pointer}
  font-size:10px;
  font-weight:bold;
 }
-
-/* WALLET */
 
 .wallet-visual{
  position:relative;
@@ -697,6 +695,7 @@ button{border:0;cursor:pointer}
  .grid{
   grid-template-columns:repeat(2,1fr);
  }
+}
 
 </style>
 </head>
@@ -709,7 +708,9 @@ button{border:0;cursor:pointer}
 
 <div class="auth-logo">C↗</div>
 
-<h1 class="auth-title">Welcome to CAMPA</h1>
+<h1 class="auth-title">
+Welcome to CAMPA
+</h1>
 
 <p class="auth-sub">
 Your smart dashboard experience
@@ -719,13 +720,15 @@ Your smart dashboard experience
 
 <div class="auth-tabs">
 
-<button id="loginTab"
+<button
+id="loginTab"
 class="active"
 onclick="showAuth('login')">
 Login
 </button>
 
-<button id="signupTab"
+<button
+id="signupTab"
 onclick="showAuth('signup')">
 Sign Up
 </button>
@@ -736,19 +739,24 @@ Sign Up
 
 <div class="field">
 <label>EMAIL</label>
-<input id="loginEmail"
+
+<input
+id="loginEmail"
 type="email"
 placeholder="Enter your email">
 </div>
 
 <div class="field">
 <label>PASSWORD</label>
-<input id="loginPassword"
+
+<input
+id="loginPassword"
 type="password"
 placeholder="Enter password">
 </div>
 
-<button class="auth-btn"
+<button
+class="auth-btn"
 onclick="loginUser()">
 Login
 </button>
@@ -759,33 +767,42 @@ Login
 
 <div class="field">
 <label>FULL NAME</label>
-<input id="signupName"
+
+<input
+id="signupName"
 type="text"
 placeholder="Enter your name">
 </div>
 
 <div class="field">
 <label>EMAIL</label>
-<input id="signupEmail"
+
+<input
+id="signupEmail"
 type="email"
 placeholder="Enter your email">
 </div>
 
 <div class="field">
 <label>PASSWORD</label>
-<input id="signupPassword"
+
+<input
+id="signupPassword"
 type="password"
 placeholder="Create password">
 </div>
 
 <div class="field">
 <label>REFERRAL CODE (OPTIONAL)</label>
-<input id="signupReferral"
+
+<input
+id="signupReferral"
 type="text"
 placeholder="Example: CAMPA20905">
 </div>
 
-<button class="auth-btn"
+<button
+class="auth-btn"
 onclick="signupUser()">
 Create Account
 </button>
@@ -793,48 +810,63 @@ Create Account
 </div>
 
 <p class="auth-note">
-Demo authentication only. Secure multi-user authentication will be connected through the backend in the next stage.
+Your account will be securely managed by Supabase.
 </p>
 
 </div>
 
 </section>
 
-<div id="mainApp" style="display:none">
+<div
+id="mainApp"
+style="display:none">
 
 <header class="header">
 
 <div class="brand">
 
-<div class="logo">C↗</div>
+<div class="logo">
+C↗
+</div>
 
 <div>
 <h1>CAMPA</h1>
-<p id="welcomeName">Welcome back 👋</p>
-</div>
+
+<p id="welcomeName">
+Welcome back 👋
+</p>
 
 </div>
 
-<button class="bell"
+</div>
+
+<button
+class="bell"
 onclick="openPage('notifications')">
 🔔
 </button>
 
 </header>
 
-<section id="home" class="page active">
+<section
+id="home"
+class="page active">
 
 <div class="hero">
 
 <div class="hero-content">
 
 <div class="hero-label">
-CAMPA WALLET • DEMO
+CAMPA WALLET
 </div>
 
-<h2>₹10,500.00</h2>
+<h2 id="balance">
+₹0.00
+</h2>
 
-<p>Your dashboard is ready</p>
+<p>
+Your dashboard is ready
+</p>
 
 <div class="hero-actions">
 
@@ -856,13 +888,13 @@ Explore Plans
 
 <div class="stat">
 <div class="stat-icon">📈</div>
-<strong>12</strong>
+<strong id="activityCount">0</strong>
 <span>Activities</span>
 </div>
 
 <div class="stat">
 <div class="stat-icon">👥</div>
-<strong>12</strong>
+<strong id="referralCount">0</strong>
 <span>Referrals</span>
 </div>
 
@@ -880,40 +912,76 @@ Explore Plans
 
 <div class="grid">
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('plans')">
-<div class="quick-icon q1">📊</div>
+
+<div class="quick-icon q1">
+📊
+</div>
+
 <span>Plans</span>
+
 </button>
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('wallet')">
-<div class="quick-icon q2">💰</div>
+
+<div class="quick-icon q2">
+💰
+</div>
+
 <span>Wallet</span>
+
 </button>
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('deposit')">
-<div class="quick-icon q3">➕</div>
+
+<div class="quick-icon q3">
+➕
+</div>
+
 <span>Deposit</span>
+
 </button>
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('withdraw')">
-<div class="quick-icon q4">↥</div>
+
+<div class="quick-icon q4">
+↥
+</div>
+
 <span>Withdraw</span>
+
 </button>
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('referral')">
-<div class="quick-icon q5">👥</div>
+
+<div class="quick-icon q5">
+👥
+</div>
+
 <span>Referral</span>
+
 </button>
 
-<button class="quick"
+<button
+class="quick"
 onclick="openPage('history')">
-<div class="quick-icon q6">📜</div>
+
+<div class="quick-icon q6">
+📜
+</div>
+
 <span>History</span>
+
 </button>
 
 </div>
@@ -922,10 +990,12 @@ onclick="openPage('history')">
 
 <div class="feature-art"></div>
 
-<h3>Grow With CAMPA</h3>
+<h3>
+Grow With CAMPA
+</h3>
 
 <p>
-Explore plans, track activity and manage your demo wallet.
+Manage your account, wallet and activities from one place.
 </p>
 
 <button onclick="openPage('plans')">
@@ -936,7 +1006,9 @@ Explore Now →
 
 <div class="section-head">
 
-<h2>Recent Activity</h2>
+<h2>
+Recent Activity
+</h2>
 
 <button onclick="openPage('history')">
 View All
@@ -944,31 +1016,27 @@ View All
 
 </div>
 
-<div class="activity">
+<div
+id="recentActivity"
+class="activity">
 
 <div class="activity-row">
 
-<div class="act-icon">✓</div>
+<div class="act-icon">
+✓
+</div>
 
 <div class="act-info">
-<strong>Demo Credit</strong>
-<small>Today</small>
+
+<strong>
+No activity yet
+</strong>
+
+<small>
+Your activity will appear here
+</small>
+
 </div>
-
-<div class="plus">+₹1,000</div>
-
-</div>
-
-<div class="activity-row">
-
-<div class="act-icon">📊</div>
-
-<div class="act-info">
-<strong>Demo Plan</strong>
-<small>Yesterday</small>
-</div>
-
-<div class="minus">-₹500</div>
 
 </div>
 
@@ -976,13 +1044,16 @@ View All
 
 <div class="referral">
 
-<h3>Invite & Connect</h3>
+<h3>
+Invite & Connect
+</h3>
 
 <p>
 Share your CAMPA referral code with friends.
 </p>
 
-<button class="primary"
+<button
+class="primary"
 onclick="shareReferral()">
 Share Referral
 </button>
@@ -993,15 +1064,14 @@ Share Referral
 
 <section id="plans" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
 <h1 class="title">Plans</h1>
 
 <p class="subtitle">
-Explore CAMPA demo plans
+Choose a CAMPA plan
 </p>
 
 <div class="plan">
@@ -1012,11 +1082,11 @@ Explore CAMPA demo plans
 </div>
 
 <p>
-A simple starter plan designed for testing the CAMPA experience.
+Starter plan for the CAMPA platform.
 </p>
 
-<button onclick="demo('Starter Plan')">
-View Plan
+<button onclick="selectPlan('Starter Plan',500)">
+Select Plan
 </button>
 
 </div>
@@ -1029,11 +1099,11 @@ View Plan
 </div>
 
 <p>
-A standard plan with a polished dashboard and sample activity.
+Growth plan with a larger demo allocation.
 </p>
 
-<button onclick="demo('Growth Plan')">
-View Plan
+<button onclick="selectPlan('Growth Plan',1000)">
+Select Plan
 </button>
 
 </div>
@@ -1046,11 +1116,11 @@ View Plan
 </div>
 
 <p>
-Premium demo experience for testing the complete application flow.
+Premium plan for the complete CAMPA experience.
 </p>
 
-<button onclick="demo('Premium Plan')">
-View Plan
+<button onclick="selectPlan('Premium Plan',2500)">
+Select Plan
 </button>
 
 </div>
@@ -1060,24 +1130,25 @@ View Plan
 
 <section id="wallet" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
 <h1 class="title">My Wallet</h1>
 
 <p class="subtitle">
-Your CAMPA demo wallet
+Your account balance
 </p>
 
 <div class="wallet-visual">
 
 <small>
-AVAILABLE DEMO BALANCE
+AVAILABLE BALANCE
 </small>
 
-<h2>₹10,500.00</h2>
+<h2 id="walletBalance">
+₹0.00
+</h2>
 
 </div>
 
@@ -1086,17 +1157,17 @@ AVAILABLE DEMO BALANCE
 <h3>Wallet Status</h3>
 
 <p>
-Your demo wallet is active and ready for testing.
+Your wallet is connected to your CAMPA account.
 </p>
 
 </div>
 
 <div class="wallet-card">
 
-<h3>Important</h3>
+<h3>Transactions</h3>
 
 <p>
-Current wallet balance and transactions are demonstration data.
+Your deposits, withdrawals and other account activity will appear in your history.
 </p>
 
 </div>
@@ -1106,15 +1177,14 @@ Current wallet balance and transactions are demonstration data.
 
 <section id="deposit" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
 <h1 class="title">Deposit</h1>
 
 <p class="subtitle">
-Add demo balance
+Add funds to your account
 </p>
 
 <div class="auth-card">
@@ -1126,6 +1196,7 @@ Add demo balance
 <input
 id="depositAmount"
 type="number"
+min="1"
 placeholder="Enter amount">
 
 </div>
@@ -1133,9 +1204,7 @@ placeholder="Enter amount">
 <button
 class="auth-btn"
 onclick="submitDeposit()">
-
 Continue
-
 </button>
 
 </div>
@@ -1145,15 +1214,14 @@ Continue
 
 <section id="withdraw" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
 <h1 class="title">Withdraw</h1>
 
 <p class="subtitle">
-Demo withdrawal request
+Request a withdrawal
 </p>
 
 <div class="auth-card">
@@ -1165,6 +1233,7 @@ Demo withdrawal request
 <input
 id="withdrawAmount"
 type="number"
+min="1"
 placeholder="Enter amount">
 
 </div>
@@ -1183,19 +1252,17 @@ placeholder="example@upi">
 <button
 class="auth-btn"
 onclick="submitWithdraw()">
-
 Submit Request
-
 </button>
 
 </div>
 
 </section>
 
+
 <section id="referral" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
@@ -1211,14 +1278,21 @@ Invite your friends
 YOUR REFERRAL CODE
 </small>
 
-<h2 style="font-size:25px">
-CAMPA20905
+<h2
+id="referralCode"
+style="font-size:25px">
+CAMPA
 </h2>
 
 <br>
 
 <button
-style="padding:10px 15px;border-radius:10px;color:#6415bd;background:#fff;font-weight:bold"
+style="
+padding:10px 15px;
+border-radius:10px;
+color:#6415bd;
+background:#fff;
+font-weight:bold"
 onclick="shareReferral()">
 Share Code
 </button>
@@ -1229,8 +1303,13 @@ Share Code
 
 <h3>Total Referrals</h3>
 
-<p style="font-size:25px;color:#6415bd;font-weight:bold">
-12
+<p
+id="referralTotal"
+style="
+font-size:25px;
+color:#6415bd;
+font-weight:bold">
+0
 </p>
 
 </div>
@@ -1240,60 +1319,36 @@ Share Code
 
 <section id="history" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
 <h1 class="title">History</h1>
 
 <p class="subtitle">
-Recent activity
+Your account activity
 </p>
 
-<div class="activity">
+<div
+id="historyList"
+class="activity">
 
 <div class="activity-row">
 
-<div class="act-icon">✓</div>
+<div class="act-icon">
+📜
+</div>
 
 <div class="act-info">
-<strong>Demo Credit</strong>
-<small>Today</small>
-</div>
 
-<div class="plus">
-+₹1,000
-</div>
+<strong>
+No transactions yet
+</strong>
 
-</div>
+<small>
+Your activity will appear here
+</small>
 
-<div class="activity-row">
-
-<div class="act-icon">📊</div>
-
-<div class="act-info">
-<strong>Demo Plan</strong>
-<small>Yesterday</small>
-</div>
-
-<div class="minus">
--₹500
-</div>
-
-</div>
-
-<div class="activity-row">
-
-<div class="act-icon">💰</div>
-
-<div class="act-info">
-<strong>Demo Wallet</strong>
-<small>3 days ago</small>
-</div>
-
-<div class="plus">
-+₹2,000
 </div>
 
 </div>
@@ -1305,8 +1360,7 @@ Recent activity
 
 <section id="notifications" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
@@ -1315,35 +1369,29 @@ Notifications
 </h1>
 
 <p class="subtitle">
-Latest CAMPA updates
+CAMPA updates
 </p>
 
 <div class="wallet-card">
 
-<h3>🎉 Welcome to CAMPA</h3>
+<h3>
+🎉 Welcome to CAMPA
+</h3>
 
 <p>
-Your CAMPA dashboard is ready.
-</p>
-
-</div>
-
-<div class="wallet-card">
-
-<h3>✨ New Design</h3>
-
-<p>
-The CAMPA interface has been upgraded with a premium visual design.
+Your account is ready.
 </p>
 
 </div>
 
 <div class="wallet-card">
 
-<h3>🛡️ Demo Mode</h3>
+<h3>
+🔐 Secure Account
+</h3>
 
 <p>
-Current balances and transactions are demonstration data.
+Your login is handled through Supabase Authentication.
 </p>
 
 </div>
@@ -1353,8 +1401,7 @@ Current balances and transactions are demonstration data.
 
 <section id="profile" class="page">
 
-<button class="back"
-onclick="openPage('home')">
+<button class="back" onclick="openPage('home')">
 ← Back
 </button>
 
@@ -1363,7 +1410,7 @@ Profile
 </h1>
 
 <p class="subtitle">
-Your account
+Your account information
 </p>
 
 <div class="profile">
@@ -1377,7 +1424,7 @@ CAMPA User
 </h2>
 
 <p id="profileEmail">
-demo@campa.app
+Loading...
 </p>
 
 <br>
@@ -1401,6 +1448,7 @@ class="active"
 onclick="openPage('home')">
 
 <div class="nav-icon">⌂</div>
+
 <span>Home</span>
 
 </button>
@@ -1410,6 +1458,7 @@ id="nav-plans"
 onclick="openPage('plans')">
 
 <div class="nav-icon">▣</div>
+
 <span>Plans</span>
 
 </button>
@@ -1419,6 +1468,7 @@ id="nav-wallet"
 onclick="openPage('wallet')">
 
 <div class="nav-icon">▤</div>
+
 <span>Wallet</span>
 
 </button>
@@ -1428,6 +1478,7 @@ id="nav-referral"
 onclick="openPage('referral')">
 
 <div class="nav-icon">♧</div>
+
 <span>Referral</span>
 
 </button>
@@ -1437,6 +1488,7 @@ id="nav-profile"
 onclick="openPage('profile')">
 
 <div class="nav-icon">●</div>
+
 <span>Profile</span>
 
 </button>
@@ -1448,7 +1500,9 @@ onclick="openPage('profile')">
 </div>
 
 
-<div id="modal" class="modal">
+<div
+id="modal"
+class="modal">
 
 <div class="modal-box">
 
@@ -1466,10 +1520,23 @@ Close
 
 </div>
 
-</div>
+ </div>
 
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
 
 function showAuth(type){
 
@@ -1488,17 +1555,21 @@ document.getElementById("signupTab");
 if(type === "login"){
 
 loginForm.style.display = "block";
+
 signupForm.style.display = "none";
 
 loginTab.classList.add("active");
+
 signupTab.classList.remove("active");
 
 }else{
 
 loginForm.style.display = "none";
+
 signupForm.style.display = "block";
 
 loginTab.classList.remove("active");
+
 signupTab.classList.add("active");
 
 }
@@ -1506,20 +1577,24 @@ signupTab.classList.add("active");
 }
 
 
-function signupUser(){
+async function signupUser(){
 
 const name =
-document.getElementById("signupName").value.trim();
+document.getElementById("signupName")
+.value.trim();
 
 const email =
-document.getElementById("signupEmail").value.trim();
+document.getElementById("signupEmail")
+.value.trim();
 
 const password =
-document.getElementById("signupPassword").value;
+document.getElementById("signupPassword")
+.value;
 
 if(!name){
 
 alert("Please enter your name.");
+
 return;
 
 }
@@ -1527,48 +1602,80 @@ return;
 if(!email){
 
 alert("Please enter your email.");
+
 return;
 
 }
 
-if(!password || password.length < 6){
+if(password.length < 6){
 
 alert("Password must contain at least 6 characters.");
+
 return;
 
 }
 
-const user = {
-name:name,
-email:email
-};
+try{
 
-localStorage.setItem(
-"campaDemoUser",
-JSON.stringify(user)
+const {data,error} =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+if(data.user){
+
+document.getElementById("signupPassword")
+.value = "";
+
+alert(
+"Account created successfully. Check your email if email confirmation is enabled."
 );
 
-localStorage.setItem(
-"campaLoggedIn",
-"true"
+}
+
+}catch(error){
+
+alert(
+"Something went wrong. Please try again."
 );
 
-loadUser();
+}
 
 }
 
 
-function loginUser(){
+async function loginUser(){
 
 const email =
-document.getElementById("loginEmail").value.trim();
+document.getElementById("loginEmail")
+.value.trim();
 
 const password =
-document.getElementById("loginPassword").value;
+document.getElementById("loginPassword")
+.value;
 
 if(!email){
 
 alert("Please enter your email.");
+
 return;
 
 }
@@ -1576,114 +1683,195 @@ return;
 if(!password){
 
 alert("Please enter your password.");
-return;
-
-}
-
-const saved =
-localStorage.getItem("campaDemoUser");
-
-if(!saved){
-
-alert("No demo account found. Please create an account first.");
-
-showAuth("signup");
 
 return;
 
 }
 
-const user =
-JSON.parse(saved);
+try{
 
-if(user.email !== email){
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
 
-alert("Email does not match the demo account.");
+email:email,
+
+password:password
+
+});
+
+if(error){
+
+alert(error.message);
+
 return;
 
 }
 
-localStorage.setItem(
-"campaLoggedIn",
-"true"
+if(data.user){
+
+loadUser(data.user);
+
+}
+
+}catch(error){
+
+alert(
+"Login failed. Please try again."
 );
 
-loadUser();
+}
 
 }
 
 
-function loadUser(){
+async function loadUser(user){
 
-const saved =
-localStorage.getItem("campaDemoUser");
+if(!user){
 
-if(!saved){
+const result =
+await supabaseClient.auth.getUser();
+
+if(result.error){
 
 showAuth("login");
+
 return;
 
 }
 
-const user =
-JSON.parse(saved);
+user = result.data.user;
 
-document.getElementById("auth").style.display = "none";
+}
 
-document.getElementById("mainApp").style.display = "block";
+document.getElementById("auth")
+.style.display = "none";
 
-document.getElementById("welcomeName").innerText =
-"Welcome, " + user.name + " 👋";
+document.getElementById("mainApp")
+.style.display = "block";
 
-document.getElementById("profileName").innerText =
-user.name;
+const metadata =
+user.user_metadata || {};
 
-document.getElementById("profileEmail").innerText =
+const name =
+metadata.full_name ||
+user.email.split("@")[0];
+
+document.getElementById("welcomeName")
+.innerText =
+"Welcome, " + name + " 👋";
+
+document.getElementById("profileName")
+.innerText =
+name;
+
+document.getElementById("profileEmail")
+.innerText =
 user.email;
 
+const referralCode =
+"CAMPA" +
+user.id
+.replace(/-/g,"")
+.substring(0,6)
+.toUpperCase();
+
+document.getElementById("referralCode")
+.innerText =
+referralCode;
+
 }
 
 
-function logoutUser(){
+async function logoutUser(){
 
-localStorage.setItem(
-"campaLoggedIn",
-"false"
-);
+const {error} =
+await supabaseClient.auth.signOut();
 
-document.getElementById("mainApp").style.display = "none";
+if(error){
 
-document.getElementById("auth").style.display = "flex";
+alert(error.message);
+
+return;
+
+}
+
+document.getElementById("mainApp")
+.style.display = "none";
+
+document.getElementById("auth")
+.style.display = "flex";
 
 showAuth("login");
 
 }
 
 
-window.addEventListener("load",function(){
+async function checkSession(){
 
-const logged =
-localStorage.getItem("campaLoggedIn");
+const {data} =
+await supabaseClient.auth.getSession();
 
-const user =
-localStorage.getItem("campaDemoUser");
+if(data.session){
 
-if(logged === "true" && user){
-
-loadUser();
+loadUser(data.session.user);
 
 }else{
 
-document.getElementById("auth").style.display = "flex";
+document.getElementById("auth")
+.style.display = "flex";
 
-document.getElementById("mainApp").style.display = "none";
+document.getElementById("mainApp")
+.style.display = "none";
+
+}
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+function(event,session){
+
+if(session){
+
+loadUser(session.user);
 
 }
 
 });
 
 
+async function selectPlan(name,amount){
+
+document.getElementById("modalTitle")
+.innerText =
+name;
+
+document.getElementById("modalText")
+.innerText =
+"Selected plan: " +
+name +
+" — ₹" +
+amount +
+". Payment integration will be connected separately.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal")
+.classList.remove("show");
+
+}
+
+
+function openPage(page){
+
 const pages = [
+
 "home",
 "plans",
 "wallet",
@@ -1693,19 +1881,17 @@ const pages = [
 "history",
 "notifications",
 "profile"
+
 ];
-
-
-function openPage(page){
 
 pages.forEach(function(id){
 
-const el =
+const element =
 document.getElementById(id);
 
-if(el){
+if(element){
 
-el.classList.remove("active");
+element.classList.remove("active");
 
 }
 
@@ -1721,9 +1907,9 @@ selected.classList.add("active");
 }
 
 document.querySelectorAll(".nav button")
-.forEach(function(btn){
+.forEach(function(button){
 
-btn.classList.remove("active");
+button.classList.remove("active");
 
 });
 
@@ -1744,84 +1930,24 @@ behavior:"smooth"
 }
 
 
-function demo(name){
-
-document.getElementById("modalTitle")
-.innerText = name + " — CAMPA";
-
-document.getElementById("modalText")
-.innerText =
-"This feature is currently running in demo mode. Real-money transactions are not connected.";
-
-document.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-function closeModal(){
-
-document.getElementById("modal")
-.classList.remove("show");
-
-}
-
-
-function submitDeposit(){
-
-const amount =
-document.getElementById("depositAmount").value;
-
-if(!amount || Number(amount) <= 0){
-
-alert("Please enter a valid amount.");
-return;
-
-}
-
-demo("Deposit ₹" + amount);
-
-}
-
-
-function submitWithdraw(){
-
-const amount =
-document.getElementById("withdrawAmount").value;
-
-const account =
-document.getElementById("withdrawAccount")
-.value.trim();
-
-if(!amount || Number(amount) <= 0){
-
-alert("Please enter a valid amount.");
-return;
-
-}
-
-if(!account){
-
-alert("Please enter your UPI ID / account.");
-return;
-
-}
-
-demo("Withdrawal Request");
-
-}
-
-
 function shareReferral(){
 
+const code =
+document.getElementById("referralCode")
+.innerText;
+
 const text =
-"Join CAMPA using my referral code: CAMPA20905";
+"Join CAMPA using my referral code: " +
+code;
 
 if(navigator.share){
 
 navigator.share({
-title:"CAMPA",
+
+title:"CAMPA Referral",
+
 text:text
+
 });
 
 }else if(navigator.clipboard){
@@ -1830,7 +1956,9 @@ navigator.clipboard
 .writeText(text)
 .then(function(){
 
-alert("Referral code copied!");
+alert(
+"Referral code copied!"
+);
 
 });
 
@@ -1843,10 +1971,88 @@ alert(text);
 }
 
 
-document.getElementById("modal")
-.addEventListener("click",function(e){
+function submitDeposit(){
 
-if(e.target === this){
+const amount =
+document.getElementById("depositAmount")
+.value;
+
+if(!amount || Number(amount) <= 0){
+
+alert(
+"Please enter a valid amount."
+);
+
+return;
+
+}
+
+document.getElementById("modalTitle")
+.innerText =
+"Deposit Request";
+
+document.getElementById("modalText")
+.innerText =
+"Deposit request for ₹" +
+amount +
+" is ready. Payment gateway will be connected in the next stage.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function submitWithdraw(){
+
+const amount =
+document.getElementById("withdrawAmount")
+.value;
+
+const account =
+document.getElementById("withdrawAccount")
+.value.trim();
+
+if(!amount || Number(amount) <= 0){
+
+alert(
+"Please enter a valid amount."
+);
+
+return;
+
+}
+
+if(!account){
+
+alert(
+"Please enter your UPI ID or account."
+);
+
+return;
+
+}
+
+document.getElementById("modalTitle")
+.innerText =
+"Withdrawal Request";
+
+document.getElementById("modalText")
+.innerText =
+"Your withdrawal request has been prepared. Real-money payout processing requires a secure backend/payment integration.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+document.getElementById("modal")
+.addEventListener(
+"click",
+function(event){
+
+if(event.target === this){
 
 closeModal();
 
@@ -1854,7 +2060,10 @@ closeModal();
 
 });
 
+
+checkSession();
+
 </script>
 
 </body>
-  </html>
+</html>
