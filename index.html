@@ -286,11 +286,11 @@
       </section>
 
       <nav>
-        <button>⌂<span>Home</span></button>
-        <button>▣<span>Plans</span></button>
-        <button>▤<span>Wallet</span></button>
-        <button>♧<span>Referral</span></button>
-        <button>●<span>Profile</span></button>
+        <button onclick="showPage('home')">⌂<span>Home</span></button>
+<button onclick="showPage('plans')">▣<span>Plans</span></button>
+<button onclick="showPage('wallet')">▤<span>Wallet</span></button>
+<button onclick="showPage('referral')">♧<span>Referral</span></button>
+<button onclick="showPage('profile')">●<span>Profile</span></button>
       </nav>
 
     </section>
@@ -298,6 +298,27 @@
   </div>
 
   <script>
+   function showPage(page) {
+  if (page === "home") {
+    alert("CAMPA Home");
+  }
+
+  if (page === "plans") {
+    alert("CAMPA Plans");
+  }
+
+  if (page === "wallet") {
+    alert("CAMPA Wallet");
+  }
+
+  if (page === "referral") {
+    alert("CAMPA Referral");
+  }
+
+  if (page === "profile") {
+    alert("CAMPA Profile");
+  }
+   }
     function openDashboard() {
       document.getElementById("welcome").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
