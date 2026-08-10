@@ -2067,3 +2067,549 @@ checkSession();
 
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =  https://tkpanotfjfiabjjznkxq.supabase.co/rest/v1/
+
+const SUPABASE_PUBLISHABLE_KEY =
+sb_publishable_g1W2F-S5qfcd7Etk22UBsQ_WEN6OvT4
+ 
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+function showAuth(type){
+
+const loginForm =
+document.getElementById("loginForm");
+
+const signupForm =
+document.getElementById("signupForm");
+
+const loginTab =
+document.getElementById("loginTab");
+
+const signupTab =
+document.getElementById("signupTab");
+
+if(type === "login"){
+
+loginForm.style.display = "block";
+
+signupForm.style.display = "none";
+
+loginTab.classList.add("active");
+
+signupTab.classList.remove("active");
+
+}else{
+
+loginForm.style.display = "none";
+
+signupForm.style.display = "block";
+
+loginTab.classList.remove("active");
+
+signupTab.classList.add("active");
+
+}
+
+}
+
+
+async function signupUser(){
+
+const name =
+document.getElementById("signupName")
+.value.trim();
+
+const email =
+document.getElementById("signupEmail")
+.value.trim();
+
+const password =
+document.getElementById("signupPassword")
+.value;
+
+if(!name){
+
+alert("Please enter your name.");
+
+return;
+
+}
+
+if(!email){
+
+alert("Please enter your email.");
+
+return;
+
+}
+
+if(password.length < 6){
+
+alert("Password must contain at least 6 characters.");
+
+return;
+
+}
+
+try{
+
+const {data,error} =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+if(data.user){
+
+document.getElementById("signupPassword")
+.value = "";
+
+alert(
+"Account created successfully. Check your email if email confirmation is enabled."
+);
+
+}
+
+}catch(error){
+
+alert(
+"Something went wrong. Please try again."
+);
+
+}
+
+}
+
+
+async function loginUser(){
+
+const email =
+document.getElementById("loginEmail")
+.value.trim();
+
+const password =
+document.getElementById("loginPassword")
+.value;
+
+if(!email){
+
+alert("Please enter your email.");
+
+return;
+
+}
+
+if(!password){
+
+alert("Please enter your password.");
+
+return;
+
+}
+
+try{
+
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+if(data.user){
+
+loadUser(data.user);
+
+}
+
+}catch(error){
+
+alert(
+"Login failed. Please try again."
+);
+
+}
+
+}
+
+
+async function loadUser(user){
+
+if(!user){
+
+const result =
+await supabaseClient.auth.getUser();
+
+if(result.error){
+
+showAuth("login");
+
+return;
+
+}
+
+user = result.data.user;
+
+}
+
+document.getElementById("auth")
+.style.display = "none";
+
+document.getElementById("mainApp")
+.style.display = "block";
+
+const metadata =
+user.user_metadata || {};
+
+const name =
+metadata.full_name ||
+user.email.split("@")[0];
+
+document.getElementById("welcomeName")
+.innerText =
+"Welcome, " + name + " 👋";
+
+document.getElementById("profileName")
+.innerText =
+name;
+
+document.getElementById("profileEmail")
+.innerText =
+user.email;
+
+const referralCode =
+"CAMPA" +
+user.id
+.replace(/-/g,"")
+.substring(0,6)
+.toUpperCase();
+
+document.getElementById("referralCode")
+.innerText =
+referralCode;
+
+}
+
+
+async function logoutUser(){
+
+const {error} =
+await supabaseClient.auth.signOut();
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+document.getElementById("mainApp")
+.style.display = "none";
+
+document.getElementById("auth")
+.style.display = "flex";
+
+showAuth("login");
+
+}
+
+
+async function checkSession(){
+
+const {data} =
+await supabaseClient.auth.getSession();
+
+if(data.session){
+
+loadUser(data.session.user);
+
+}else{
+
+document.getElementById("auth")
+.style.display = "flex";
+
+document.getElementById("mainApp")
+.style.display = "none";
+
+}
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+function(event,session){
+
+if(session){
+
+loadUser(session.user);
+
+}
+
+});
+
+
+async function selectPlan(name,amount){
+
+document.getElementById("modalTitle")
+.innerText =
+name;
+
+document.getElementById("modalText")
+.innerText =
+"Selected plan: " +
+name +
+" — ₹" +
+amount +
+". Payment integration will be connected separately.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal")
+.classList.remove("show");
+
+}
+
+
+function openPage(page){
+
+const pages = [
+
+"home",
+"plans",
+"wallet",
+"deposit",
+"withdraw",
+"referral",
+"history",
+"notifications",
+"profile"
+
+];
+
+pages.forEach(function(id){
+
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.classList.remove("active");
+
+}
+
+});
+
+const selected =
+document.getElementById(page);
+
+if(selected){
+
+selected.classList.add("active");
+
+}
+
+document.querySelectorAll(".nav button")
+.forEach(function(button){
+
+button.classList.remove("active");
+
+});
+
+const nav =
+document.getElementById("nav-" + page);
+
+if(nav){
+
+nav.classList.add("active");
+
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function shareReferral(){
+
+const code =
+document.getElementById("referralCode")
+.innerText;
+
+const text =
+"Join CAMPA using my referral code: " +
+code;
+
+if(navigator.share){
+
+navigator.share({
+
+title:"CAMPA Referral",
+
+text:text
+
+});
+
+}else if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(text)
+.then(function(){
+
+alert(
+"Referral code copied!"
+);
+
+});
+
+}else{
+
+alert(text);
+
+}
+
+}
+
+
+function submitDeposit(){
+
+const amount =
+document.getElementById("depositAmount")
+.value;
+
+if(!amount || Number(amount) <= 0){
+
+alert(
+"Please enter a valid amount."
+);
+
+return;
+
+}
+
+document.getElementById("modalTitle")
+.innerText =
+"Deposit Request";
+
+document.getElementById("modalText")
+.innerText =
+"Deposit request for ₹" +
+amount +
+" is ready. Payment gateway will be connected in the next stage.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function submitWithdraw(){
+
+const amount =
+document.getElementById("withdrawAmount")
+.value;
+
+const account =
+document.getElementById("withdrawAccount")
+.value.trim();
+
+if(!amount || Number(amount) <= 0){
+
+alert(
+"Please enter a valid amount."
+);
+
+return;
+
+}
+
+if(!account){
+
+alert(
+"Please enter your UPI ID or account."
+);
+
+return;
+
+}
+
+document.getElementById("modalTitle")
+.innerText =
+"Withdrawal Request";
+
+document.getElementById("modalText")
+.innerText =
+"Your withdrawal request has been prepared. Real-money payout processing requires a secure backend/payment integration.";
+
+document.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+document.getElementById("modal")
+.addEventListener(
+"click",
+function(event){
+
+if(event.target === this){
+
+closeModal();
+
+}
+
+});
+
+
+checkSession();
+
+</script>
+
+</body>
+</html>
