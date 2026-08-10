@@ -1,376 +1,736 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAMPA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAMPA</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f5ff;
-      color: #17113d;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f1ff;
+  color:#17122d;
+}
 
-    .app {
-      max-width: 480px;
-      min-height: 100vh;
-      margin: auto;
-      background: #faf9ff;
-    }
+button{font:inherit;cursor:pointer}
 
-    .hero {
-      min-height: 100vh;
-      padding: 70px 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      background: linear-gradient(145deg, #16002f, #5717b8);
-    }
+.app{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:#faf9ff;
+}
 
-    .logo {
-      width: 100px;
-      height: 100px;
-      border-radius: 28px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, #ffb51b, #8a35ff);
-      font-size: 42px;
-      font-weight: 900;
-    }
+.screen{display:none;min-height:100vh;padding-bottom:80px}
+.screen.active{display:block}
 
-    h1 {
-      margin-top: 22px;
-      font-size: 42px;
-      letter-spacing: 2px;
-    }
+.splash{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding:30px;
+  background:linear-gradient(145deg,#18002f,#6419c7);
+}
 
-    .hero p {
-      margin-top: 8px;
-      opacity: .85;
-    }
+.logo{
+  width:100px;
+  height:100px;
+  display:grid;
+  place-items:center;
+  border-radius:28px;
+  background:linear-gradient(145deg,#ffc229,#8739ff);
+  font-size:42px;
+  font-weight:900;
+  box-shadow:0 15px 40px #0004;
+}
 
-    button {
-      border: 0;
-      cursor: pointer;
-    }
+.splash h1{
+  margin-top:22px;
+  font-size:42px;
+  letter-spacing:3px;
+}
 
-    .start {
-      margin-top: 30px;
-      padding: 15px 45px;
-      border-radius: 13px;
-      background: white;
-      color: #5717b8;
-      font-weight: 800;
-      font-size: 16px;
-    }
+.splash p{
+  margin-top:8px;
+  opacity:.85;
+}
 
-    .dashboard {
-      display: none;
-      padding-bottom: 85px;
-    }
+.primary{
+  border:0;
+  border-radius:13px;
+  padding:14px 24px;
+  background:#631bc4;
+  color:white;
+  font-weight:800;
+}
 
-    header {
-      padding: 22px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.start{
+  margin-top:30px;
+  padding:15px 48px;
+  border-radius:13px;
+  border:0;
+  background:white;
+  color:#5b16b4;
+  font-weight:800;
+}
 
-    .brand {
-      font-size: 22px;
-      font-weight: 900;
-    }
+header{
+  padding:22px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .mini-logo {
-      display: inline-grid;
-      place-items: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: #ffb51b;
-      margin-right: 6px;
-    }
+.brand{
+  font-size:23px;
+  font-weight:900;
+}
 
-    .balance {
-      margin: 0 20px 20px;
-      padding: 24px;
-      border-radius: 22px;
-      color: white;
-      background: linear-gradient(135deg, #5717b8, #8636e8);
-    }
+.mini-logo{
+  display:inline-grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  margin-right:6px;
+  border-radius:10px;
+  background:#ffbd24;
+}
 
-    .balance small {
-      opacity: .8;
-    }
+.sub{
+  color:#777;
+  font-size:13px;
+  margin-top:4px;
+}
 
-    .balance h2 {
-      font-size: 31px;
-      margin: 10px 0 20px;
-    }
+.balance{
+  margin:0 20px 20px;
+  padding:24px;
+  border-radius:23px;
+  color:white;
+  background:linear-gradient(135deg,#5915b8,#8938e9);
+}
 
-    .actions {
-      display: flex;
-      gap: 10px;
-    }
+.balance small{opacity:.8}
+.balance h2{font-size:32px;margin:10px 0 20px}
 
-    .actions button {
-      flex: 1;
-      padding: 11px;
-      border-radius: 10px;
-      color: #5717b8;
-      background: white;
-      font-weight: 700;
-    }
+.actions{
+  display:flex;
+  gap:10px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 0 20px;
-    }
+.actions button{
+  flex:1;
+  border:0;
+  padding:11px;
+  border-radius:10px;
+  background:white;
+  color:#5c17b6;
+  font-weight:800;
+}
 
-    .card {
-      padding: 18px 5px;
-      border-radius: 15px;
-      background: white;
-      text-align: center;
-      border: 1px solid #eee;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:0 20px;
+}
 
-    .card .icon {
-      font-size: 23px;
-    }
+.card{
+  padding:18px 7px;
+  border-radius:16px;
+  background:white;
+  border:1px solid #ece9f5;
+  text-align:center;
+  box-shadow:0 3px 12px #28145c08;
+}
 
-    .card span {
-      display: block;
-      margin-top: 7px;
-      font-size: 12px;
-    }
+.card:active{transform:scale(.97)}
 
-    .invite {
-      margin: 20px;
-      padding: 20px;
-      border-radius: 18px;
-      background: #eee5ff;
-    }
+.icon{font-size:24px}
+.card span{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+}
 
-    .invite h3 {
-      margin-bottom: 7px;
-    }
+.section{
+  padding:0 20px;
+  margin-top:22px;
+}
 
-    .invite button {
-      margin-top: 15px;
-      padding: 11px 17px;
-      border-radius: 10px;
-      color: white;
-      background: #5717b8;
-      font-weight: 700;
-    }
+.section h2{font-size:21px}
 
-    nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(480px, 100%);
-      display: flex;
-      justify-content: space-around;
-      padding: 11px 5px;
-      background: white;
-      border-top: 1px solid #eee;
-    }
+.invite{
+  margin:20px;
+  padding:20px;
+  border-radius:18px;
+  background:#eee5ff;
+}
 
-    nav button {
-      background: none;
-      color: #777;
-      font-size: 18px;
-    }
+.invite p{
+  margin-top:8px;
+  color:#666;
+  font-size:14px;
+}
 
-    nav span {
-      display: block;
-      font-size: 10px;
-      margin-top: 3px;
-    }
-  </style>
+.invite button{
+  margin-top:15px;
+  border:0;
+  padding:11px 18px;
+  border-radius:10px;
+  background:#5c17b6;
+  color:white;
+  font-weight:700;
+}
+
+.page-title{
+  padding:0 20px 20px;
+}
+
+.page-title h2{font-size:27px}
+.page-title p{margin-top:7px;color:#777}
+
+.list{
+  padding:0 20px;
+}
+
+.list-card{
+  margin-bottom:12px;
+  padding:18px;
+  border-radius:17px;
+  background:white;
+  border:1px solid #ece9f5;
+}
+
+.list-card h3{margin-bottom:7px}
+.list-card p{color:#777;font-size:14px;margin-bottom:12px}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.back{
+  margin:0 20px 20px;
+  border:0;
+  background:#eee8fb;
+  color:#5c17b6;
+  padding:11px 18px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.profile-box{
+  margin:0 20px 15px;
+  padding:22px;
+  border-radius:20px;
+  background:white;
+  border:1px solid #ece9f5;
+}
+
+.avatar{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#eadcff;
+  font-size:27px;
+  margin-bottom:12px;
+}
+
+.demo{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:7px;
+  background:#fff1c7;
+  color:#8b6500;
+  font-size:11px;
+  font-weight:800;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(480px,100%);
+  display:flex;
+  justify-content:space-around;
+  padding:10px 3px;
+  background:white;
+  border-top:1px solid #e9e6f0;
+  z-index:20;
+}
+
+nav button{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:18px;
+}
+
+nav button.active{color:#5d17b8}
+
+nav span{
+  display:block;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 20px;
+  color:#777;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <section class="hero" id="welcome">
-      <div class="logo">C↗</div>
-      <h1>CAMPA</h1>
-      <p>Earn Together, Grow Forever</p>
+<!-- SPLASH -->
+<section id="splash" class="splash">
+  <div class="logo">C↗</div>
+  <h1>CAMPA</h1>
+  <p>Smart. Simple. Original.</p>
+  <button class="start" onclick="openApp()">Get Started</button>
+</section>
 
-      <button class="start" onclick="openDashboard()">
-        Get Started
-      </button>
-    </section>
 
-    <section class="dashboard" id="dashboard">
+<!-- HOME -->
+<section id="home" class="screen">
 
+<header>
+  <div>
+    <div class="brand">
+      <span class="mini-logo">C↗</span>CAMPA
+    </div>
+    <div class="sub">Welcome back 👋</div>
+  </div>
+  <div>🔔</div>
+</header>
+
+<div class="balance">
+  <small>DEMO BALANCE</small>
+  <h2>₹10,500.00</h2>
+
+  <div class="actions">
+    <button onclick="showPage('wallet')">Wallet</button>
+    <button onclick="showPage('history')">History</button>
+  </div>
+</div>
+
+<div class="grid">
+
+  <button class="card" onclick="showPage('plans')">
+    <div class="icon">📊</div>
+    <span>Plans</span>
+  </button>
+
+  <button class="card" onclick="showPage('wallet')">
+    <div class="icon">💰</div>
+    <span>Wallet</span>
+  </button>
+
+  <button class="card" onclick="showPage('deposit')">
+    <div class="icon">➕</div>
+    <span>Deposit</span>
+  </button>
+
+  <button class="card" onclick="showPage('withdraw')">
+    <div class="icon">↥</div>
+    <span>Withdraw</span>
+  </button>
+
+  <button class="card" onclick="showPage('referral')">
+    <div class="icon">👥</div>
+    <span>Referral</span>
+  </button>
+
+  <button class="card" onclick="showPage('history')">
+    <div class="icon">📜</div>
+    <span>History</span>
+  </button>
+
+</div>
+
+<div class="invite">
+  <h3>Invite & Connect</h3>
+  <p>Share your CAMPA demo referral link with friends.</p>
+  <button onclick="shareReferral()">Share Referral</button>
+</div>
+
+<nav id="nav">
+  <button onclick="showPage('home')" data-page="home">⌂<span>Home</span></button>
+  <button onclick="showPage('plans')" data-page="plans">▣<span>Plans</span></button>
+  <button onclick="showPage('wallet')" data-page="wallet">▤<span>Wallet</span></button>
+  <button onclick="showPage('referral')" data-page="referral">♧<span>Referral</span></button>
+  <button onclick="showPage('profile')" data-page="profile">●<span>Profile</span></button>
+</nav>
+
+</section>
+
+
+<!-- OTHER PAGES -->
+<section id="content" class="screen"></section>
+
+</div>
+
+
+<script>
+
+function openApp(){
+  document.getElementById("splash").style.display="none";
+  showPage("home");
+}
+
+
+function showPage(page){
+
+  document.getElementById("splash").style.display="none";
+
+  const home=document.getElementById("home");
+  const content=document.getElementById("content");
+
+  if(page==="home"){
+    home.classList.add("active");
+    content.classList.remove("active");
+    setActive("home");
+    return;
+  }
+
+  home.classList.remove("active");
+  content.classList.add("active");
+  setActive(page);
+
+  let html="";
+
+  if(page==="plans"){
+    html=`
       <header>
-        <div>
-          <div class="brand">
-            <span class="mini-logo">C↗</span>
-            CAMPA
-          </div>
-          <small>Welcome back 👋</small>
-        </div>
-
-        <div>🔔</div>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>📊</div>
       </header>
 
-      <section class="balance">
+      <div class="page-title">
+        <h2>Demo Plans</h2>
+        <p>Prototype plans for testing only.</p>
+        <span class="demo">DEMO ONLY</span>
+      </div>
+
+      <div class="list">
+
+        <div class="list-card">
+          <h3>Starter</h3>
+          <p>Basic demo package</p>
+          <div class="row">
+            <strong>₹500 Demo</strong>
+            <button class="primary" onclick="selectPlan('Starter')">Select</button>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <h3>Growth</h3>
+          <p>Standard demo package</p>
+          <div class="row">
+            <strong>₹1,000 Demo</strong>
+            <button class="primary" onclick="selectPlan('Growth')">Select</button>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <h3>Premium</h3>
+          <p>Advanced demo package</p>
+          <div class="row">
+            <strong>₹2,500 Demo</strong>
+            <button class="primary" onclick="selectPlan('Premium')">Select</button>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="back" onclick="showPage('home')">← Back Home</button>
+    `;
+  }
+
+
+  if(page==="wallet"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>💰</div>
+      </header>
+
+      <div class="page-title">
+        <h2>Demo Wallet</h2>
+        <p>Your prototype wallet overview.</p>
+      </div>
+
+      <div class="balance">
         <small>DEMO BALANCE</small>
-        <h2>₹ 10,500.00</h2>
+        <h2>₹10,500.00</h2>
+        <span class="demo">TEST DATA</span>
+      </div>
 
-        <div class="actions">
-          <button>Add Money</button>
-          <button>Withdraw</button>
-        </div>
-      </section>
+      <div class="list">
 
-      <div class="grid">
-
-        <div class="card">
-          <div class="icon">📊</div>
-          <span>Plans</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">💰</div>
-          <span>Wallet</span>
+        <div class="list-card">
+          <div class="row">
+            <div>
+              <h3>Available Demo Balance</h3>
+              <p>For prototype testing only.</p>
+            </div>
+            <strong>₹10,500</strong>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="icon">➕</div>
-          <span>Deposit</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">↥</div>
-          <span>Withdraw</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">👥</div>
-          <span>Referral</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">📜</div>
-          <span>History</span>
+        <div class="list-card">
+          <h3>Wallet Actions</h3>
+          <p>Real money transactions are not enabled.</p>
+          <button class="primary" onclick="showPage('deposit')">Demo Deposit</button>
+          <button class="primary" onclick="showPage('withdraw')">Demo Withdraw</button>
         </div>
 
       </div>
 
-      <section class="invite">
-        <h3>Invite & Earn</h3>
-        <p>Share your referral link and track your demo rewards.</p>
-
-        <button onclick="shareReferral()">
-          Share Referral
-        </button>
-      </section>
-
-      <nav>
-        <button onclick="showPage('home')">⌂<span>Home</span></button>
-<button onclick="showPage('plans')">▣<span>Plans</span></button>
-<button onclick="showPage('wallet')">▤<span>Wallet</span></button>
-<button onclick="showPage('referral')">♧<span>Referral</span></button>
-<button onclick="showPage('profile')">●<span>Profile</span></button>
-      </nav>
-
-    </section>
-
-  </div>
-
-  <script>
-   function showPage(page) {
-  if (page === "home") {
-    alert("CAMPA Home");
+      <button class="back" onclick="showPage('home')">← Back Home</button>
+    `;
   }
 
-  if (page === "plans") {
-  document.getElementById("dashboard").innerHTML = `
-    <header>
-      <div class="brand">
-        <span class="mini-logo">C↗</span>
-        CAMPA
-      </div>
-      <div>📊 Plans</div>
-    </header>
 
-    <div style="padding:20px">
-      <h2>Choose Your Plan</h2>
-      <p style="margin:8px 0 20px;color:#777">
-        Demo plans for testing only
-      </p>
+  if(page==="deposit"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>➕</div>
+      </header>
 
-      <div class="card" style="margin-bottom:12px;text-align:left">
-        <h3>Starter</h3>
-        <p style="margin:8px 0">Demo Plan</p>
-        <strong>₹500 Demo</strong>
-        <br><br>
-        <button onclick="alert('Starter demo selected')"
-          style="padding:12px 18px;border-radius:10px;background:#5717b8;color:white">
-          Select
-        </button>
+      <div class="page-title">
+        <h2>Demo Deposit</h2>
+        <p>No real payment is processed.</p>
       </div>
 
-      <div class="card" style="margin-bottom:12px;text-align:left">
-        <h3>Growth</h3>
-        <p style="margin:8px 0">Demo Plan</p>
-        <strong>₹1,000 Demo</strong>
-        <br><br>
-        <button onclick="alert('Growth demo selected')"
-          style="padding:12px 18px;border-radius:10px;background:#5717b8;color:white">
-          Select
-        </button>
+      <div class="list">
+        <div class="list-card">
+          <span class="demo">DEMO MODE</span>
+          <h3 style="margin-top:10px">Add Demo Balance</h3>
+          <p>Select a test amount.</p>
+
+          <button class="primary" onclick="demoAction('₹500')">₹500</button>
+          <button class="primary" onclick="demoAction('₹1,000')">₹1,000</button>
+          <button class="primary" onclick="demoAction('₹5,000')">₹5,000</button>
+        </div>
       </div>
 
-      <button onclick="location.reload()"
-        style="margin-top:15px;padding:12px 20px;border-radius:10px">
-        ← Back
-      </button>
-    </div>
-  `;
-  }
+      <button class="back" onclick="showPage('wallet')">← Back to Wallet</button>
+    `;
   }
 
-  if (page === "wallet") {
-    alert("CAMPA Wallet");
+
+  if(page==="withdraw"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>↥</div>
+      </header>
+
+      <div class="page-title">
+        <h2>Demo Withdraw</h2>
+        <p>Real withdrawals are disabled in this prototype.</p>
+      </div>
+
+      <div class="list">
+        <div class="list-card">
+          <span class="demo">DEMO ONLY</span>
+          <h3 style="margin-top:10px">Withdrawal Preview</h3>
+          <p>This screen only demonstrates the user interface.</p>
+          <button class="primary" onclick="demoAction('Withdrawal')">
+            Test Withdrawal
+          </button>
+        </div>
+      </div>
+
+      <button class="back" onclick="showPage('wallet')">← Back to Wallet</button>
+    `;
   }
 
-  if (page === "referral") {
-    alert("CAMPA Referral");
+
+  if(page==="referral"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>👥</div>
+      </header>
+
+      <div class="page-title">
+        <h2>Referral</h2>
+        <p>Demo referral dashboard.</p>
+      </div>
+
+      <div class="list">
+
+        <div class="list-card">
+          <span class="demo">DEMO DATA</span>
+          <h3 style="margin-top:10px">Your Referral Code</h3>
+          <p id="refcode">CAMPA-DEMO-01</p>
+          <button class="primary" onclick="shareReferral()">
+            Copy Referral
+          </button>
+        </div>
+
+        <div class="list-card">
+          <div class="row">
+            <span>Total Demo Referrals</span>
+            <strong>12</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="back" onclick="showPage('home')">← Back Home</button>
+    `;
   }
 
-  if (page === "profile") {
-    alert("CAMPA Profile");
+
+  if(page==="history"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>📜</div>
+      </header>
+
+      <div class="page-title">
+        <h2>Demo History</h2>
+        <p>Sample transactions for interface testing.</p>
+      </div>
+
+      <div class="list">
+
+        <div class="list-card">
+          <div class="row">
+            <div>
+              <h3>Demo Credit</h3>
+              <p>Today • Test transaction</p>
+            </div>
+            <strong>+₹1,000</strong>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="row">
+            <div>
+              <h3>Demo Plan</h3>
+              <p>Yesterday • Test transaction</p>
+            </div>
+            <strong>-₹500</strong>
+          </div>
+        </div>
+
+        <div class="empty">
+          More demo history will appear here.
+        </div>
+
+      </div>
+
+      <button class="back" onclick="showPage('home')">← Back Home</button>
+    `;
   }
-   }
-    function openDashboard() {
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("dashboard").style.display = "block";
+
+
+  if(page==="profile"){
+    html=`
+      <header>
+        <div class="brand"><span class="mini-logo">C↗</span>CAMPA</div>
+        <div>👤</div>
+      </header>
+
+      <div class="page-title">
+        <h2>Profile</h2>
+        <p>CAMPA demo account.</p>
+      </div>
+
+      <div class="profile-box">
+        <div class="avatar">👤</div>
+        <h3>Demo User</h3>
+        <p class="sub">demo@campa.app</p>
+        <br>
+        <span class="demo">DEMO ACCOUNT</span>
+      </div>
+
+      <div class="list">
+        <div class="list-card">
+          <div class="row">
+            <span>Account</span>
+            <strong>Demo</strong>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="row">
+            <span>Notifications</span>
+            <strong>ON</strong>
+          </div>
+        </div>
+
+        <div class="list-card">
+          <div class="row">
+            <span>Version</span>
+            <strong>1.0 Demo</strong>
+          </div>
+        </div>
+      </div>
+
+      <button class="back" onclick="showPage('home')">← Back Home</button>
+    `;
+  }
+
+  content.innerHTML=html;
+}
+
+
+function setActive(page){
+
+  document.querySelectorAll("nav button").forEach(btn=>{
+    btn.classList.remove("active");
+
+    if(btn.dataset.page===page){
+      btn.classList.add("active");
     }
+  });
+}
 
-    function shareReferral() {
-      alert("Demo referral link copied!");
-    }
-  </script>
+
+function selectPlan(name){
+  alert(name + " demo plan selected.");
+}
+
+
+function demoAction(action){
+  alert(action + " is available only as a demo.");
+}
+
+
+function shareReferral(){
+
+  if(navigator.clipboard){
+    navigator.clipboard.writeText("CAMPA-DEMO-01");
+  }
+
+  alert("Demo referral code copied: CAMPA-DEMO-01");
+}
+
+</script>
 
 </body>
-  </html>
+</html>
