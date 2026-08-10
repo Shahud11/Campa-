@@ -3,243 +3,337 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CAMPA — Smart Dashboard</title>
+<title>CAMPA</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --purple:#6b20c9;
-  --purple2:#9b42ee;
-  --dark:#181225;
-  --muted:#888197;
-  --bg:#f6f3fb;
-  --card:#fff;
-  --line:#ebe6f3;
+ --purple:#6b20c9;
+ --purple2:#9b42ee;
+ --dark:#181225;
+ --muted:#888197;
+ --bg:#f6f3fb;
+ --card:#fff;
+ --line:#ebe6f3;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--dark);
+ font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--dark);
 }
 
 button,input{font:inherit}
 button{border:0;cursor:pointer}
 
 .app{
-  width:100%;
-  max-width:480px;
-  min-height:100vh;
-  margin:auto;
-  background:var(--bg);
-  padding-bottom:85px;
+ width:100%;
+ max-width:480px;
+ min-height:100vh;
+ margin:auto;
+ background:var(--bg);
+ padding-bottom:85px;
+}
+
+/* AUTH */
+
+.auth{
+ min-height:100vh;
+ padding:25px 19px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+}
+
+.auth-logo{
+ width:70px;
+ height:70px;
+ border-radius:22px;
+ margin:0 auto 16px;
+ display:grid;
+ place-items:center;
+ color:#fff;
+ font-size:32px;
+ font-weight:900;
+ background:linear-gradient(135deg,#ffbd22,#8c2fe0);
+ box-shadow:0 12px 28px #7623c52e;
+}
+
+.auth-title{
+ text-align:center;
+ font-size:29px;
+}
+
+.auth-sub{
+ text-align:center;
+ color:#91899d;
+ font-size:12px;
+ margin:7px 0 22px;
+}
+
+.auth-card{
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:23px;
+ padding:20px;
+ box-shadow:0 10px 30px #30105c0b;
+}
+
+.auth-tabs{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ background:#f3eff8;
+ padding:4px;
+ border-radius:11px;
+ margin-bottom:18px;
+}
+
+.auth-tabs button{
+ padding:10px;
+ border-radius:8px;
+ background:transparent;
+ color:#888;
+ font-size:12px;
+ font-weight:bold;
+}
+
+.auth-tabs button.active{
+ background:#fff;
+ color:var(--purple);
+ box-shadow:0 3px 8px #00000009;
+}
+
+.field{
+ margin-bottom:13px;
+}
+
+.field label{
+ display:block;
+ font-size:11px;
+ font-weight:bold;
+ margin-bottom:6px;
+}
+
+.field input{
+ width:100%;
+ border:1px solid #ddd7e8;
+ border-radius:10px;
+ padding:12px;
+ outline:none;
+ font-size:12px;
+}
+
+.field input:focus{
+ border-color:var(--purple);
+}
+
+.auth-btn{
+ width:100%;
+ padding:13px;
+ border-radius:11px;
+ background:linear-gradient(135deg,#6316bd,#9135e4);
+ color:#fff;
+ font-weight:bold;
+ font-size:12px;
+}
+
+.auth-note{
+ text-align:center;
+ color:#999;
+ font-size:9px;
+ line-height:1.5;
+ margin-top:15px;
 }
 
 /* HEADER */
+
 .header{
-  background:#fff;
-  padding:17px 18px 13px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+ background:#fff;
+ padding:17px 18px 13px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
+ display:flex;
+ align-items:center;
+ gap:11px;
 }
 
 .logo{
-  width:46px;
-  height:46px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ffbd22,#8c2fe0);
-  color:white;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  font-weight:900;
-  box-shadow:0 7px 18px #7623c52c;
+ width:46px;
+ height:46px;
+ border-radius:15px;
+ background:linear-gradient(135deg,#ffbd22,#8c2fe0);
+ color:white;
+ display:grid;
+ place-items:center;
+ font-size:22px;
+ font-weight:900;
+ box-shadow:0 7px 18px #7623c52c;
 }
 
 .brand h1{
-  font-size:23px;
-  letter-spacing:.4px;
+ font-size:23px;
 }
 
 .brand p{
-  color:#958e9f;
-  font-size:11px;
-  margin-top:3px;
+ color:#958e9f;
+ font-size:11px;
+ margin-top:3px;
 }
 
 .bell{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  background:#f4effa;
-  font-size:20px;
+ width:42px;
+ height:42px;
+ border-radius:14px;
+ background:#f4effa;
+ font-size:20px;
 }
 
 /* PAGE */
+
 .page{
-  display:none;
-  padding:15px 17px;
+ display:none;
+ padding:15px 17px;
 }
 
 .page.active{
-  display:block;
+ display:block;
 }
 
 /* HERO */
-.hero{
-  position:relative;
-  overflow:hidden;
-  min-height:175px;
-  padding:23px;
-  border-radius:27px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 90% 10%,#d87cff 0,transparent 27%),
-    radial-gradient(circle at 10% 100%,#4610a3 0,transparent 38%),
-    linear-gradient(135deg,#5010ae,#9136e7);
-  box-shadow:0 17px 35px #671ab72d;
-}
 
-.hero:after{
-  content:"";
-  position:absolute;
-  width:150px;
-  height:150px;
-  border:25px solid #ffffff13;
-  border-radius:50%;
-  right:-50px;
-  bottom:-55px;
+.hero{
+ position:relative;
+ overflow:hidden;
+ min-height:175px;
+ padding:23px;
+ border-radius:27px;
+ color:#fff;
+ background:
+ radial-gradient(circle at 90% 10%,#d87cff 0,transparent 27%),
+ radial-gradient(circle at 10% 100%,#4610a3 0,transparent 38%),
+ linear-gradient(135deg,#5010ae,#9136e7);
+ box-shadow:0 17px 35px #671ab72d;
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
+ position:relative;
+ z-index:2;
 }
 
 .hero-label{
-  font-size:11px;
-  opacity:.78;
-  letter-spacing:1px;
-  font-weight:bold;
+ font-size:11px;
+ opacity:.78;
+ letter-spacing:1px;
+ font-weight:bold;
 }
 
 .hero h2{
-  font-size:35px;
-  margin:10px 0 5px;
+ font-size:35px;
+ margin:10px 0 5px;
 }
 
 .hero p{
-  font-size:11px;
-  opacity:.78;
+ font-size:11px;
+ opacity:.78;
 }
 
 .hero-actions{
-  display:flex;
-  gap:9px;
-  margin-top:19px;
+ display:flex;
+ gap:9px;
+ margin-top:19px;
 }
 
 .hero-actions button{
-  padding:10px 17px;
-  border-radius:11px;
-  background:#fff;
-  color:#6319ba;
-  font-size:11px;
-  font-weight:bold;
+ padding:10px 17px;
+ border-radius:11px;
+ background:#fff;
+ color:#6319ba;
+ font-size:11px;
+ font-weight:bold;
 }
 
 /* STATS */
+
 .stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:13px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin-top:13px;
 }
 
 .stat{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:13px 9px;
-  text-align:center;
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:13px 9px;
+ text-align:center;
 }
 
-.stat-icon{
-  font-size:19px;
-}
+.stat-icon{font-size:19px}
 
 .stat strong{
-  display:block;
-  font-size:14px;
-  margin-top:5px;
+ display:block;
+ font-size:14px;
+ margin-top:5px;
 }
 
 .stat span{
-  display:block;
-  color:#999;
-  font-size:9px;
-  margin-top:3px;
+ display:block;
+ color:#999;
+ font-size:9px;
+ margin-top:3px;
 }
 
 /* SECTION */
+
 .section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 2px 10px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:22px 2px 10px;
 }
 
-.section-head h2{
-  font-size:18px;
-}
+.section-head h2{font-size:18px}
 
 .section-head button{
-  background:none;
-  color:var(--purple);
-  font-size:11px;
-  font-weight:bold;
+ background:none;
+ color:var(--purple);
+ font-size:11px;
+ font-weight:bold;
 }
 
-/* QUICK GRID */
+/* QUICK */
+
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
 }
 
 .quick{
-  min-height:105px;
-  border-radius:18px;
-  background:#fff;
-  border:1px solid var(--line);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 6px 16px #2c125c07;
-  transition:.18s;
-}
-
-.quick:active{
-  transform:scale(.95);
+ min-height:105px;
+ border-radius:18px;
+ background:#fff;
+ border:1px solid var(--line);
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ gap:8px;
 }
 
 .quick-icon{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  font-size:21px;
+ width:42px;
+ height:42px;
+ border-radius:14px;
+ display:grid;
+ place-items:center;
+ font-size:21px;
 }
 
 .q1{background:#eee3ff}
@@ -250,446 +344,360 @@ button{border:0;cursor:pointer}
 .q6{background:#eeeaf9}
 
 .quick span{
-  font-size:11px;
-  font-weight:bold;
+ font-size:11px;
+ font-weight:bold;
 }
 
-/* FEATURE BANNER */
+/* FEATURE */
+
 .feature{
-  position:relative;
-  overflow:hidden;
-  margin-top:16px;
-  min-height:125px;
-  padding:19px;
-  border-radius:22px;
-  color:white;
-  background:
-    radial-gradient(circle at 85% 30%,#c77aff 0,transparent 25%),
-    linear-gradient(120deg,#201338,#56208c);
+ position:relative;
+ overflow:hidden;
+ margin-top:16px;
+ min-height:125px;
+ padding:19px;
+ border-radius:22px;
+ color:white;
+ background:
+ radial-gradient(circle at 85% 30%,#c77aff 0,transparent 25%),
+ linear-gradient(120deg,#201338,#56208c);
 }
 
 .feature h3{
-  font-size:18px;
-  position:relative;
-  z-index:2;
+ font-size:18px;
+ position:relative;
+ z-index:2;
 }
 
 .feature p{
-  max-width:225px;
-  margin:7px 0 13px;
-  font-size:10px;
-  line-height:1.5;
-  color:#ddd4e9;
-  position:relative;
-  z-index:2;
+ max-width:225px;
+ margin:7px 0 13px;
+ font-size:10px;
+ line-height:1.5;
+ color:#ddd4e9;
+ position:relative;
+ z-index:2;
 }
 
 .feature button{
-  position:relative;
-  z-index:2;
-  padding:9px 13px;
-  border-radius:9px;
-  color:#5f16b7;
-  background:white;
-  font-size:10px;
-  font-weight:bold;
+ position:relative;
+ z-index:2;
+ padding:9px 13px;
+ border-radius:9px;
+ color:#5f16b7;
+ background:white;
+ font-size:10px;
+ font-weight:bold;
 }
 
 .feature-art{
-  position:absolute;
-  right:17px;
-  top:25px;
-  width:85px;
-  height:85px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ffcb45,#b44fff);
-  opacity:.85;
-  box-shadow:0 0 35px #d56cff;
+ position:absolute;
+ right:17px;
+ top:25px;
+ width:85px;
+ height:85px;
+ border-radius:50%;
+ background:linear-gradient(135deg,#ffcb45,#b44fff);
+ opacity:.85;
 }
 
 /* ACTIVITY */
+
 .activity{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:19px;
-  padding:4px 14px;
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:19px;
+ padding:4px 14px;
 }
 
 .activity-row{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:13px 0;
-  border-bottom:1px solid #f0edf4;
+ display:flex;
+ align-items:center;
+ gap:11px;
+ padding:13px 0;
+ border-bottom:1px solid #f0edf4;
 }
 
-.activity-row:last-child{
-  border-bottom:0;
-}
+.activity-row:last-child{border-bottom:0}
 
 .act-icon{
-  width:39px;
-  height:39px;
-  border-radius:12px;
-  background:#eee4ff;
-  display:grid;
-  place-items:center;
+ width:39px;
+ height:39px;
+ border-radius:12px;
+ background:#eee4ff;
+ display:grid;
+ place-items:center;
 }
 
-.act-info{
-  flex:1;
-}
+.act-info{flex:1}
 
 .act-info strong{
-  display:block;
-  font-size:12px;
+ display:block;
+ font-size:12px;
 }
 
 .act-info small{
-  color:#999;
-  font-size:9px;
-  display:block;
-  margin-top:3px;
+ color:#999;
+ font-size:9px;
+ display:block;
+ margin-top:3px;
 }
 
 .plus{
-  color:#159449;
-  font-size:12px;
-  font-weight:bold;
+ color:#159449;
+ font-size:12px;
+ font-weight:bold;
 }
 
 .minus{
-  color:#d33939;
-  font-size:12px;
-  font-weight:bold;
+ color:#d33939;
+ font-size:12px;
+ font-weight:bold;
 }
 
 /* REFERRAL */
+
 .referral{
-  position:relative;
-  overflow:hidden;
-  margin-top:16px;
-  padding:20px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#eee2ff,#faf8ff);
-  border:1px solid #dfd1f3;
+ position:relative;
+ overflow:hidden;
+ margin-top:16px;
+ padding:20px;
+ border-radius:22px;
+ background:linear-gradient(135deg,#eee2ff,#faf8ff);
+ border:1px solid #dfd1f3;
 }
 
-.referral:after{
-  content:"👥";
-  position:absolute;
-  right:18px;
-  top:19px;
-  font-size:43px;
-  opacity:.17;
-}
-
-.referral h3{
-  font-size:17px;
-}
+.referral h3{font-size:17px}
 
 .referral p{
-  width:72%;
-  color:#81798d;
-  font-size:10px;
-  line-height:1.5;
-  margin:6px 0 12px;
+ width:72%;
+ color:#81798d;
+ font-size:10px;
+ line-height:1.5;
+ margin:6px 0 12px;
 }
 
 .primary{
-  background:linear-gradient(135deg,#6317bd,#9234e5);
-  color:#fff;
-  padding:10px 14px;
-  border-radius:10px;
-  font-size:10px;
-  font-weight:bold;
+ background:linear-gradient(135deg,#6317bd,#9234e5);
+ color:#fff;
+ padding:10px 14px;
+ border-radius:10px;
+ font-size:10px;
+ font-weight:bold;
 }
 
-/* INNER PAGE */
+/* INNER */
+
 .back{
-  background:none;
-  color:var(--purple);
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:13px;
+ background:none;
+ color:var(--purple);
+ font-size:12px;
+ font-weight:bold;
+ margin-bottom:13px;
 }
 
-.title{
-  font-size:27px;
-}
+.title{font-size:27px}
 
 .subtitle{
-  color:#918a9a;
-  font-size:11px;
-  margin-top:4px;
-  margin-bottom:17px;
+ color:#918a9a;
+ font-size:11px;
+ margin-top:4px;
+ margin-bottom:17px;
 }
 
-/* PLAN CARDS */
+/* PLAN */
+
 .plan{
-  position:relative;
-  overflow:hidden;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:21px;
-  padding:18px;
-  margin-bottom:11px;
-}
-
-.plan:after{
-  content:"";
-  position:absolute;
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  right:-24px;
-  top:-25px;
-  background:#eee3ff;
+ position:relative;
+ overflow:hidden;
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:21px;
+ padding:18px;
+ margin-bottom:11px;
 }
 
 .plan-top{
-  display:flex;
-  justify-content:space-between;
-  position:relative;
-  z-index:2;
+ display:flex;
+ justify-content:space-between;
 }
 
-.plan h3{
-  font-size:16px;
-}
+.plan h3{font-size:16px}
 
 .price{
-  color:var(--purple);
-  font-size:17px;
-  font-weight:bold;
+ color:var(--purple);
+ font-size:17px;
+ font-weight:bold;
 }
 
 .plan p{
-  color:#888;
-  font-size:10px;
-  line-height:1.5;
-  margin:9px 0 13px;
-  position:relative;
-  z-index:2;
+ color:#888;
+ font-size:10px;
+ line-height:1.5;
+ margin:9px 0 13px;
 }
 
 .plan button{
-  background:var(--purple);
-  color:white;
-  padding:9px 13px;
-  border-radius:9px;
-  font-size:10px;
-  font-weight:bold;
-  position:relative;
-  z-index:2;
+ background:var(--purple);
+ color:white;
+ padding:9px 13px;
+ border-radius:9px;
+ font-size:10px;
+ font-weight:bold;
 }
 
 /* WALLET */
-.wallet-visual{
-  position:relative;
-  overflow:hidden;
-  padding:22px;
-  border-radius:23px;
-  color:#fff;
-  background:linear-gradient(135deg,#34135d,#9238df);
-  box-shadow:0 14px 30px #6821a42b;
-}
 
-.wallet-visual:after{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:120px;
-  border:20px solid #ffffff13;
-  border-radius:50%;
-  right:-35px;
-  bottom:-45px;
+.wallet-visual{
+ position:relative;
+ overflow:hidden;
+ padding:22px;
+ border-radius:23px;
+ color:#fff;
+ background:linear-gradient(135deg,#34135d,#9238df);
+ box-shadow:0 14px 30px #6821a42b;
 }
 
 .wallet-visual small{
-  font-size:10px;
-  opacity:.75;
+ font-size:10px;
+ opacity:.75;
 }
 
 .wallet-visual h2{
-  font-size:32px;
-  margin-top:9px;
+ font-size:32px;
+ margin-top:9px;
 }
 
 .wallet-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:17px;
-  margin-top:11px;
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:17px;
+ margin-top:11px;
 }
 
 .wallet-card h3{
-  font-size:14px;
+ font-size:14px;
 }
 
 .wallet-card p{
-  color:#888;
-  font-size:10px;
-  line-height:1.5;
-  margin-top:6px;
+ color:#888;
+ font-size:10px;
+ line-height:1.5;
+ margin-top:6px;
 }
 
-/* FORM */
-.form{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:18px;
-}
-
-.field{
-  margin-bottom:13px;
-}
-
-.field label{
-  display:block;
-  font-size:11px;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.field input{
-  width:100%;
-  border:1px solid #ddd7e8;
-  border-radius:10px;
-  padding:12px;
-  outline:none;
-  font-size:12px;
-}
-
-.field input:focus{
-  border-color:var(--purple);
-}
-
-.full{
-  width:100%;
-  padding:13px;
-  border-radius:11px;
-  background:linear-gradient(135deg,#6316bd,#9135e4);
-  color:#fff;
-  font-weight:bold;
-  font-size:12px;
-}
-
-/* PROFILE */
 .profile{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:25px;
-  text-align:center;
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:22px;
+ padding:25px;
+ text-align:center;
 }
 
 .avatar{
-  width:78px;
-  height:78px;
-  margin:auto;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#ffbe25,#8930dd);
-  color:#fff;
-  font-size:30px;
-  font-weight:bold;
-  box-shadow:0 9px 25px #7624c52c;
+ width:78px;
+ height:78px;
+ margin:auto;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#ffbe25,#8930dd);
+ color:#fff;
+ font-size:30px;
+ font-weight:bold;
 }
 
 .profile h2{
-  margin-top:12px;
-  font-size:20px;
+ margin-top:12px;
+ font-size:20px;
 }
 
 .profile p{
-  color:#999;
-  font-size:11px;
-  margin-top:4px;
+ color:#999;
+ font-size:11px;
+ margin-top:4px;
 }
 
-/* NAV */
 .nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(480px,100%);
-  height:76px;
-  background:#fff;
-  border-top:1px solid #e6e1ec;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  z-index:80;
+ position:fixed;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ width:min(480px,100%);
+ height:76px;
+ background:#fff;
+ border-top:1px solid #e6e1ec;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ z-index:80;
 }
 
 .nav button{
-  background:#fff;
-  color:#918b99;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  font-size:9px;
+ background:#fff;
+ color:#918b99;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:4px;
+ font-size:9px;
 }
 
 .nav button.active{
-  color:var(--purple);
-  font-weight:bold;
+ color:var(--purple);
+ font-weight:bold;
 }
 
 .nav-icon{
-  font-size:20px;
+ font-size:20px;
 }
 
-/* MODAL */
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:200;
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ align-items:flex-end;
+ justify-content:center;
+ z-index:200;
 }
 
 .modal.show{
-  display:flex;
+ display:flex;
 }
 
 .modal-box{
-  width:min(480px,100%);
-  background:#fff;
-  border-radius:25px 25px 0 0;
-  padding:24px;
+ width:min(480px,100%);
+ background:#fff;
+ border-radius:25px 25px 0 0;
+ padding:24px;
 }
 
 .modal-box h2{
-  font-size:20px;
+ font-size:20px;
 }
 
 .modal-box p{
-  color:#777;
-  font-size:12px;
-  line-height:1.5;
-  margin:9px 0 19px;
+ color:#777;
+ font-size:12px;
+ line-height:1.5;
+ margin:9px 0 19px;
 }
 
 .close{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  background:#eeeaf3;
-  font-weight:bold;
+ width:100%;
+ padding:12px;
+ border-radius:10px;
+ background:#eeeaf3;
+ font-weight:bold;
 }
 
 @media(max-width:350px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
+ .grid{
+  grid-template-columns:repeat(2,1fr);
+ }
+
 </style>
 </head>
 
@@ -697,44 +705,152 @@ button{border:0;cursor:pointer}
 
 <div class="app">
 
-<!-- HEADER -->
+<section id="auth" class="auth">
+
+<div class="auth-logo">C↗</div>
+
+<h1 class="auth-title">Welcome to CAMPA</h1>
+
+<p class="auth-sub">
+Your smart dashboard experience
+</p>
+
+<div class="auth-card">
+
+<div class="auth-tabs">
+
+<button id="loginTab"
+class="active"
+onclick="showAuth('login')">
+Login
+</button>
+
+<button id="signupTab"
+onclick="showAuth('signup')">
+Sign Up
+</button>
+
+</div>
+
+<div id="loginForm">
+
+<div class="field">
+<label>EMAIL</label>
+<input id="loginEmail"
+type="email"
+placeholder="Enter your email">
+</div>
+
+<div class="field">
+<label>PASSWORD</label>
+<input id="loginPassword"
+type="password"
+placeholder="Enter password">
+</div>
+
+<button class="auth-btn"
+onclick="loginUser()">
+Login
+</button>
+
+</div>
+
+<div id="signupForm" style="display:none">
+
+<div class="field">
+<label>FULL NAME</label>
+<input id="signupName"
+type="text"
+placeholder="Enter your name">
+</div>
+
+<div class="field">
+<label>EMAIL</label>
+<input id="signupEmail"
+type="email"
+placeholder="Enter your email">
+</div>
+
+<div class="field">
+<label>PASSWORD</label>
+<input id="signupPassword"
+type="password"
+placeholder="Create password">
+</div>
+
+<div class="field">
+<label>REFERRAL CODE (OPTIONAL)</label>
+<input id="signupReferral"
+type="text"
+placeholder="Example: CAMPA20905">
+</div>
+
+<button class="auth-btn"
+onclick="signupUser()">
+Create Account
+</button>
+
+</div>
+
+<p class="auth-note">
+Demo authentication only. Secure multi-user authentication will be connected through the backend in the next stage.
+</p>
+
+</div>
+
+</section>
+
+<div id="mainApp" style="display:none">
+
 <header class="header">
 
 <div class="brand">
+
 <div class="logo">C↗</div>
+
 <div>
 <h1>CAMPA</h1>
-<p>Welcome back 👋</p>
-</div>
+<p id="welcomeName">Welcome back 👋</p>
 </div>
 
-<button class="bell" onclick="openPage('notifications')">🔔</button>
+</div>
+
+<button class="bell"
+onclick="openPage('notifications')">
+🔔
+</button>
 
 </header>
 
-
-<!-- HOME -->
 <section id="home" class="page active">
 
 <div class="hero">
 
 <div class="hero-content">
 
-<div class="hero-label">CAMPA WALLET • DEMO</div>
+<div class="hero-label">
+CAMPA WALLET • DEMO
+</div>
 
 <h2>₹10,500.00</h2>
 
 <p>Your dashboard is ready</p>
 
 <div class="hero-actions">
-<button onclick="openPage('wallet')">View Wallet</button>
-<button onclick="openPage('plans')">Explore Plans</button>
-</div>
+
+<button onclick="openPage('wallet')">
+View Wallet
+</button>
+
+<button onclick="openPage('plans')">
+Explore Plans
+</button>
 
 </div>
 
 </div>
 
+</div>
 
 <div class="stats">
 
@@ -758,46 +874,49 @@ button{border:0;cursor:pointer}
 
 </div>
 
-
 <div class="section-head">
 <h2>Quick Access</h2>
 </div>
 
-
 <div class="grid">
 
-<button class="quick" onclick="openPage('plans')">
+<button class="quick"
+onclick="openPage('plans')">
 <div class="quick-icon q1">📊</div>
 <span>Plans</span>
 </button>
 
-<button class="quick" onclick="openPage('wallet')">
+<button class="quick"
+onclick="openPage('wallet')">
 <div class="quick-icon q2">💰</div>
 <span>Wallet</span>
 </button>
 
-<button class="quick" onclick="openPage('deposit')">
+<button class="quick"
+onclick="openPage('deposit')">
 <div class="quick-icon q3">➕</div>
 <span>Deposit</span>
 </button>
 
-<button class="quick" onclick="openPage('withdraw')">
+<button class="quick"
+onclick="openPage('withdraw')">
 <div class="quick-icon q4">↥</div>
 <span>Withdraw</span>
 </button>
 
-<button class="quick" onclick="openPage('referral')">
+<button class="quick"
+onclick="openPage('referral')">
 <div class="quick-icon q5">👥</div>
 <span>Referral</span>
 </button>
 
-<button class="quick" onclick="openPage('history')">
+<button class="quick"
+onclick="openPage('history')">
 <div class="quick-icon q6">📜</div>
 <span>History</span>
 </button>
 
 </div>
-
 
 <div class="feature">
 
@@ -806,23 +925,29 @@ button{border:0;cursor:pointer}
 <h3>Grow With CAMPA</h3>
 
 <p>
-Explore plans, track your activity and manage your demo wallet from one place.
+Explore plans, track activity and manage your demo wallet.
 </p>
 
-<button onclick="openPage('plans')">Explore Now →</button>
+<button onclick="openPage('plans')">
+Explore Now →
+</button>
 
 </div>
-
 
 <div class="section-head">
-<h2>Recent Activity</h2>
-<button onclick="openPage('history')">View All</button>
-</div>
 
+<h2>Recent Activity</h2>
+
+<button onclick="openPage('history')">
+View All
+</button>
+
+</div>
 
 <div class="activity">
 
 <div class="activity-row">
+
 <div class="act-icon">✓</div>
 
 <div class="act-info">
@@ -831,10 +956,11 @@ Explore plans, track your activity and manage your demo wallet from one place.
 </div>
 
 <div class="plus">+₹1,000</div>
+
 </div>
 
-
 <div class="activity-row">
+
 <div class="act-icon">📊</div>
 
 <div class="act-info">
@@ -843,10 +969,10 @@ Explore plans, track your activity and manage your demo wallet from one place.
 </div>
 
 <div class="minus">-₹500</div>
-</div>
 
 </div>
 
+</div>
 
 <div class="referral">
 
@@ -856,7 +982,8 @@ Explore plans, track your activity and manage your demo wallet from one place.
 Share your CAMPA referral code with friends.
 </p>
 
-<button class="primary" onclick="shareReferral()">
+<button class="primary"
+onclick="shareReferral()">
 Share Referral
 </button>
 
@@ -864,15 +991,18 @@ Share Referral
 
 </section>
 
-
-<!-- PLANS -->
 <section id="plans" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">Plans</h1>
-<p class="subtitle">Explore CAMPA demo plans</p>
 
+<p class="subtitle">
+Explore CAMPA demo plans
+</p>
 
 <div class="plan">
 
@@ -885,10 +1015,11 @@ Share Referral
 A simple starter plan designed for testing the CAMPA experience.
 </p>
 
-<button onclick="demo('Starter Plan')">View Plan</button>
+<button onclick="demo('Starter Plan')">
+View Plan
+</button>
 
 </div>
-
 
 <div class="plan">
 
@@ -901,10 +1032,11 @@ A simple starter plan designed for testing the CAMPA experience.
 A standard plan with a polished dashboard and sample activity.
 </p>
 
-<button onclick="demo('Growth Plan')">View Plan</button>
+<button onclick="demo('Growth Plan')">
+View Plan
+</button>
 
 </div>
-
 
 <div class="plan">
 
@@ -917,67 +1049,93 @@ A standard plan with a polished dashboard and sample activity.
 Premium demo experience for testing the complete application flow.
 </p>
 
-<button onclick="demo('Premium Plan')">View Plan</button>
+<button onclick="demo('Premium Plan')">
+View Plan
+</button>
 
 </div>
 
 </section>
 
 
-<!-- WALLET -->
 <section id="wallet" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">My Wallet</h1>
-<p class="subtitle">Your CAMPA demo wallet</p>
 
+<p class="subtitle">
+Your CAMPA demo wallet
+</p>
 
 <div class="wallet-visual">
 
-<small>AVAILABLE DEMO BALANCE</small>
+<small>
+AVAILABLE DEMO BALANCE
+</small>
 
 <h2>₹10,500.00</h2>
 
 </div>
 
-
 <div class="wallet-card">
+
 <h3>Wallet Status</h3>
+
 <p>
 Your demo wallet is active and ready for testing.
 </p>
-</div>
 
+</div>
 
 <div class="wallet-card">
+
 <h3>Important</h3>
+
 <p>
-This version uses demonstration data. No real financial transaction is connected.
+Current wallet balance and transactions are demonstration data.
 </p>
+
 </div>
 
 </section>
 
 
-<!-- DEPOSIT -->
 <section id="deposit" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">Deposit</h1>
-<p class="subtitle">Add demo balance</p>
 
+<p class="subtitle">
+Add demo balance
+</p>
 
-<div class="form">
+<div class="auth-card">
 
 <div class="field">
+
 <label>AMOUNT</label>
-<input id="depositAmount" type="number" placeholder="Enter amount">
+
+<input
+id="depositAmount"
+type="number"
+placeholder="Enter amount">
+
 </div>
 
-<button class="full" onclick="submitDeposit()">
+<button
+class="auth-btn"
+onclick="submitDeposit()">
+
 Continue
+
 </button>
 
 </div>
@@ -985,108 +1143,159 @@ Continue
 </section>
 
 
-<!-- WITHDRAW -->
 <section id="withdraw" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">Withdraw</h1>
-<p class="subtitle">Demo withdrawal request</p>
 
+<p class="subtitle">
+Demo withdrawal request
+</p>
 
-<div class="form">
+<div class="auth-card">
 
 <div class="field">
+
 <label>AMOUNT</label>
-<input id="withdrawAmount" type="number" placeholder="Enter amount">
+
+<input
+id="withdrawAmount"
+type="number"
+placeholder="Enter amount">
+
 </div>
 
 <div class="field">
+
 <label>UPI ID / ACCOUNT</label>
-<input id="withdrawAccount" type="text" placeholder="example@upi">
+
+<input
+id="withdrawAccount"
+type="text"
+placeholder="example@upi">
+
 </div>
 
-<button class="full" onclick="submitWithdraw()">
+<button
+class="auth-btn"
+onclick="submitWithdraw()">
+
 Submit Request
+
 </button>
 
 </div>
 
 </section>
 
-
-<!-- REFERRAL -->
 <section id="referral" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">Referral</h1>
-<p class="subtitle">Invite your friends</p>
 
+<p class="subtitle">
+Invite your friends
+</p>
 
 <div class="wallet-visual">
 
-<small>YOUR REFERRAL CODE</small>
+<small>
+YOUR REFERRAL CODE
+</small>
 
-<h2 style="font-size:25px">CAMPA20905</h2>
+<h2 style="font-size:25px">
+CAMPA20905
+</h2>
 
 <br>
 
-<button class="hero-actions" style="padding:10px 16px;border-radius:10px;color:#6415bd;background:#fff;font-weight:bold" onclick="shareReferral()">
+<button
+style="padding:10px 15px;border-radius:10px;color:#6415bd;background:#fff;font-weight:bold"
+onclick="shareReferral()">
 Share Code
 </button>
 
 </div>
 
-
 <div class="wallet-card">
+
 <h3>Total Referrals</h3>
+
 <p style="font-size:25px;color:#6415bd;font-weight:bold">
 12
 </p>
+
 </div>
 
 </section>
 
 
-<!-- HISTORY -->
 <section id="history" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
 <h1 class="title">History</h1>
-<p class="subtitle">Recent activity</p>
 
+<p class="subtitle">
+Recent activity
+</p>
 
 <div class="activity">
 
 <div class="activity-row">
+
 <div class="act-icon">✓</div>
+
 <div class="act-info">
 <strong>Demo Credit</strong>
 <small>Today</small>
 </div>
-<div class="plus">+₹1,000</div>
+
+<div class="plus">
++₹1,000
 </div>
 
+</div>
 
 <div class="activity-row">
+
 <div class="act-icon">📊</div>
+
 <div class="act-info">
 <strong>Demo Plan</strong>
 <small>Yesterday</small>
 </div>
-<div class="minus">-₹500</div>
+
+<div class="minus">
+-₹500
 </div>
 
+</div>
 
 <div class="activity-row">
+
 <div class="act-icon">💰</div>
+
 <div class="act-info">
 <strong>Demo Wallet</strong>
 <small>3 days ago</small>
 </div>
-<div class="plus">+₹2,000</div>
+
+<div class="plus">
++₹2,000
+</div>
+
 </div>
 
 </div>
@@ -1094,62 +1303,89 @@ Share Code
 </section>
 
 
-<!-- NOTIFICATIONS -->
 <section id="notifications" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
-<h1 class="title">Notifications</h1>
-<p class="subtitle">Latest CAMPA updates</p>
+<h1 class="title">
+Notifications
+</h1>
 
+<p class="subtitle">
+Latest CAMPA updates
+</p>
 
 <div class="wallet-card">
+
 <h3>🎉 Welcome to CAMPA</h3>
+
 <p>
-Your new CAMPA dashboard is ready.
+Your CAMPA dashboard is ready.
 </p>
+
 </div>
 
-
 <div class="wallet-card">
+
 <h3>✨ New Design</h3>
+
 <p>
-The CAMPA interface has been upgraded with a new premium visual design.
+The CAMPA interface has been upgraded with a premium visual design.
 </p>
+
 </div>
 
-
 <div class="wallet-card">
+
 <h3>🛡️ Demo Mode</h3>
+
 <p>
 Current balances and transactions are demonstration data.
 </p>
+
 </div>
 
 </section>
 
 
-<!-- PROFILE -->
 <section id="profile" class="page">
 
-<button class="back" onclick="openPage('home')">← Back</button>
+<button class="back"
+onclick="openPage('home')">
+← Back
+</button>
 
-<h1 class="title">Profile</h1>
-<p class="subtitle">Your account</p>
+<h1 class="title">
+Profile
+</h1>
 
+<p class="subtitle">
+Your account
+</p>
 
 <div class="profile">
 
-<div class="avatar">C</div>
+<div class="avatar">
+C
+</div>
 
-<h2>CAMPA User</h2>
+<h2 id="profileName">
+CAMPA User
+</h2>
 
-<p>demo@campa.app</p>
+<p id="profileEmail">
+demo@campa.app
+</p>
 
 <br>
 
-<button class="primary" onclick="demo('Profile Settings')">
-Account Settings
+<button
+class="primary"
+onclick="logoutUser()">
+Logout
 </button>
 
 </div>
@@ -1157,49 +1393,74 @@ Account Settings
 </section>
 
 
-<!-- NAVIGATION -->
 <nav class="nav">
 
-<button id="nav-home" class="active" onclick="openPage('home')">
+<button
+id="nav-home"
+class="active"
+onclick="openPage('home')">
+
 <div class="nav-icon">⌂</div>
 <span>Home</span>
+
 </button>
 
-<button id="nav-plans" onclick="openPage('plans')">
+<button
+id="nav-plans"
+onclick="openPage('plans')">
+
 <div class="nav-icon">▣</div>
 <span>Plans</span>
+
 </button>
 
-<button id="nav-wallet" onclick="openPage('wallet')">
+<button
+id="nav-wallet"
+onclick="openPage('wallet')">
+
 <div class="nav-icon">▤</div>
 <span>Wallet</span>
+
 </button>
 
-<button id="nav-referral" onclick="openPage('referral')">
+<button
+id="nav-referral"
+onclick="openPage('referral')">
+
 <div class="nav-icon">♧</div>
 <span>Referral</span>
+
 </button>
 
-<button id="nav-profile" onclick="openPage('profile')">
+<button
+id="nav-profile"
+onclick="openPage('profile')">
+
 <div class="nav-icon">●</div>
 <span>Profile</span>
+
 </button>
 
 </nav>
 
 </div>
 
+</div>
 
-<!-- MODAL -->
+
 <div id="modal" class="modal">
 
 <div class="modal-box">
 
-<h2 id="modalTitle">CAMPA</h2>
+<h2 id="modalTitle">
+CAMPA
+</h2>
 
 <p id="modalText"></p>
 
-<button class="close" onclick="closeModal()">
+<button
+class="close"
+onclick="closeModal()">
 Close
 </button>
 
@@ -1210,7 +1471,219 @@ Close
 
 <script>
 
-const pages=[
+function showAuth(type){
+
+const loginForm =
+document.getElementById("loginForm");
+
+const signupForm =
+document.getElementById("signupForm");
+
+const loginTab =
+document.getElementById("loginTab");
+
+const signupTab =
+document.getElementById("signupTab");
+
+if(type === "login"){
+
+loginForm.style.display = "block";
+signupForm.style.display = "none";
+
+loginTab.classList.add("active");
+signupTab.classList.remove("active");
+
+}else{
+
+loginForm.style.display = "none";
+signupForm.style.display = "block";
+
+loginTab.classList.remove("active");
+signupTab.classList.add("active");
+
+}
+
+}
+
+
+function signupUser(){
+
+const name =
+document.getElementById("signupName").value.trim();
+
+const email =
+document.getElementById("signupEmail").value.trim();
+
+const password =
+document.getElementById("signupPassword").value;
+
+if(!name){
+
+alert("Please enter your name.");
+return;
+
+}
+
+if(!email){
+
+alert("Please enter your email.");
+return;
+
+}
+
+if(!password || password.length < 6){
+
+alert("Password must contain at least 6 characters.");
+return;
+
+}
+
+const user = {
+name:name,
+email:email
+};
+
+localStorage.setItem(
+"campaDemoUser",
+JSON.stringify(user)
+);
+
+localStorage.setItem(
+"campaLoggedIn",
+"true"
+);
+
+loadUser();
+
+}
+
+
+function loginUser(){
+
+const email =
+document.getElementById("loginEmail").value.trim();
+
+const password =
+document.getElementById("loginPassword").value;
+
+if(!email){
+
+alert("Please enter your email.");
+return;
+
+}
+
+if(!password){
+
+alert("Please enter your password.");
+return;
+
+}
+
+const saved =
+localStorage.getItem("campaDemoUser");
+
+if(!saved){
+
+alert("No demo account found. Please create an account first.");
+
+showAuth("signup");
+
+return;
+
+}
+
+const user =
+JSON.parse(saved);
+
+if(user.email !== email){
+
+alert("Email does not match the demo account.");
+return;
+
+}
+
+localStorage.setItem(
+"campaLoggedIn",
+"true"
+);
+
+loadUser();
+
+}
+
+
+function loadUser(){
+
+const saved =
+localStorage.getItem("campaDemoUser");
+
+if(!saved){
+
+showAuth("login");
+return;
+
+}
+
+const user =
+JSON.parse(saved);
+
+document.getElementById("auth").style.display = "none";
+
+document.getElementById("mainApp").style.display = "block";
+
+document.getElementById("welcomeName").innerText =
+"Welcome, " + user.name + " 👋";
+
+document.getElementById("profileName").innerText =
+user.name;
+
+document.getElementById("profileEmail").innerText =
+user.email;
+
+}
+
+
+function logoutUser(){
+
+localStorage.setItem(
+"campaLoggedIn",
+"false"
+);
+
+document.getElementById("mainApp").style.display = "none";
+
+document.getElementById("auth").style.display = "flex";
+
+showAuth("login");
+
+}
+
+
+window.addEventListener("load",function(){
+
+const logged =
+localStorage.getItem("campaLoggedIn");
+
+const user =
+localStorage.getItem("campaDemoUser");
+
+if(logged === "true" && user){
+
+loadUser();
+
+}else{
+
+document.getElementById("auth").style.display = "flex";
+
+document.getElementById("mainApp").style.display = "none";
+
+}
+
+});
+
+
+const pages = [
 "home",
 "plans",
 "wallet",
@@ -1222,32 +1695,45 @@ const pages=[
 "profile"
 ];
 
+
 function openPage(page){
 
 pages.forEach(function(id){
 
-const el=document.getElementById(id);
+const el =
+document.getElementById(id);
 
 if(el){
+
 el.classList.remove("active");
+
 }
 
 });
 
-const selected=document.getElementById(page);
+const selected =
+document.getElementById(page);
 
 if(selected){
+
 selected.classList.add("active");
+
 }
 
-document.querySelectorAll(".nav button").forEach(function(btn){
+document.querySelectorAll(".nav button")
+.forEach(function(btn){
+
 btn.classList.remove("active");
+
 });
 
-const nav=document.getElementById("nav-"+page);
+const nav =
+document.getElementById("nav-" + page);
 
 if(nav){
+
 nav.classList.add("active");
+
 }
 
 window.scrollTo({
@@ -1260,45 +1746,115 @@ behavior:"smooth"
 
 function demo(name){
 
-document.getElementById("modalTitle").innerText=
-name+" — CAMPA";
+document.getElementById("modalTitle")
+.innerText = name + " — CAMPA";
 
-document.getElementById("modalText").innerText=
-"This feature is currently running in demo mode. Real-money transactions are not connected to this frontend.";
+document.getElementById("modalText")
+.innerText =
+"This feature is currently running in demo mode. Real-money transactions are not connected.";
 
-document.getElementById("modal").classList.add("show");
+document.getElementById("modal")
+.classList.add("show");
 
 }
 
 
 function closeModal(){
 
-document.getElementById("modal").classList.remove("show");
+document.getElementById("modal")
+.classList.remove("show");
 
 }
 
 
 function submitDeposit(){
 
-let amount=document.getElementById("depositAmount").value;
+const amount =
+document.getElementById("depositAmount").value;
 
-if(!amount || Number(amount)<=0){
+if(!amount || Number(amount) <= 0){
+
 alert("Please enter a valid amount.");
 return;
+
 }
 
-demo("Deposit ₹"+amount);
+demo("Deposit ₹" + amount);
 
 }
 
 
 function submitWithdraw(){
 
-let amount=document.getElementById("withdrawAmount").value;
+const amount =
+document.getElementById("withdrawAmount").value;
 
-let account=
-document.getElementById("withdrawAccount").value.trim();
+const account =
+document.getElementById("withdrawAccount")
+.value.trim();
 
-if(!amount || Number(amount)<=0){
+if(!amount || Number(amount) <= 0){
+
 alert("Please enter a valid amount.");
 return;
+
+}
+
+if(!account){
+
+alert("Please enter your UPI ID / account.");
+return;
+
+}
+
+demo("Withdrawal Request");
+
+}
+
+
+function shareReferral(){
+
+const text =
+"Join CAMPA using my referral code: CAMPA20905";
+
+if(navigator.share){
+
+navigator.share({
+title:"CAMPA",
+text:text
+});
+
+}else if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(text)
+.then(function(){
+
+alert("Referral code copied!");
+
+});
+
+}else{
+
+alert(text);
+
+}
+
+}
+
+
+document.getElementById("modal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeModal();
+
+}
+
+});
+
+</script>
+
+</body>
+  </html>
