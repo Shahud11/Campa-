@@ -2,699 +2,440 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CAMPA</title>
 
 <style>
-*{
- box-sizing:border-box;
- margin:0;
- padding:0;
-}
 
-:root{
- --purple:#6b20c9;
- --purple2:#9b42ee;
- --dark:#181225;
- --muted:#888197;
- --bg:#f6f3fb;
- --card:#fff;
- --line:#ebe6f3;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
- font-family:Arial,Helvetica,sans-serif;
- background:var(--bg);
- color:var(--dark);
+font-family:Arial,Helvetica,sans-serif;
+background:#f6f3fb;
+color:#1b1528;
 }
 
 button,input{
- font:inherit;
+font:inherit;
 }
 
 button{
- border:0;
- cursor:pointer;
+border:0;
+cursor:pointer;
 }
 
 .app{
- width:100%;
- max-width:480px;
- min-height:100vh;
- margin:auto;
- background:var(--bg);
- padding-bottom:85px;
+max-width:480px;
+min-height:100vh;
+margin:auto;
+padding-bottom:80px;
 }
 
 .auth{
- min-height:100vh;
- padding:25px 19px;
- display:flex;
- flex-direction:column;
- justify-content:center;
+min-height:100vh;
+padding:25px 18px;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
-.auth-logo{
- width:70px;
- height:70px;
- border-radius:22px;
- margin:0 auto 16px;
- display:grid;
- place-items:center;
- color:#fff;
- font-size:32px;
- font-weight:900;
- background:linear-gradient(135deg,#ffbd22,#8c2fe0);
- box-shadow:0 12px 28px #7623c52e;
+.logo-big{
+width:72px;
+height:72px;
+margin:0 auto 15px;
+border-radius:22px;
+display:grid;
+place-items:center;
+color:white;
+font-size:30px;
+font-weight:bold;
+background:linear-gradient(135deg,#ffbd25,#8d30df);
 }
 
 .auth-title{
- text-align:center;
- font-size:29px;
+text-align:center;
+font-size:28px;
 }
 
 .auth-sub{
- text-align:center;
- color:#91899d;
- font-size:12px;
- margin:7px 0 22px;
+text-align:center;
+color:#918a9c;
+font-size:12px;
+margin:7px 0 22px;
 }
 
 .auth-card{
- background:#fff;
- border:1px solid var(--line);
- border-radius:23px;
- padding:20px;
- box-shadow:0 10px 30px #30105c0b;
+background:#fff;
+border:1px solid #ebe5f2;
+border-radius:22px;
+padding:20px;
+box-shadow:0 10px 30px #3d17600c;
 }
 
-.auth-tabs{
- display:grid;
- grid-template-columns:1fr 1fr;
- background:#f3eff8;
- padding:4px;
- border-radius:11px;
- margin-bottom:18px;
+.tabs{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:4px;
+padding:4px;
+background:#f2eef7;
+border-radius:11px;
+margin-bottom:18px;
 }
 
-.auth-tabs button{
- padding:10px;
- border-radius:8px;
- background:transparent;
- color:#888;
- font-size:12px;
- font-weight:bold;
+.tabs button{
+padding:10px;
+border-radius:8px;
+background:transparent;
+color:#888;
+font-size:12px;
+font-weight:bold;
 }
 
-.auth-tabs button.active{
- background:#fff;
- color:var(--purple);
- box-shadow:0 3px 8px #00000009;
+.tabs button.active{
+background:#fff;
+color:#691bc2;
 }
 
 .field{
- margin-bottom:13px;
+margin-bottom:13px;
 }
 
 .field label{
- display:block;
- font-size:11px;
- font-weight:bold;
- margin-bottom:6px;
+display:block;
+font-size:10px;
+font-weight:bold;
+margin-bottom:6px;
 }
 
 .field input{
- width:100%;
- border:1px solid #ddd7e8;
- border-radius:10px;
- padding:12px;
- outline:none;
- font-size:12px;
+width:100%;
+padding:12px;
+border:1px solid #ddd7e7;
+border-radius:10px;
+outline:none;
+font-size:12px;
 }
 
 .field input:focus{
- border-color:var(--purple);
+border-color:#7623cf;
 }
 
-.auth-btn{
- width:100%;
- padding:13px;
- border-radius:11px;
- background:linear-gradient(135deg,#6316bd,#9135e4);
- color:#fff;
- font-weight:bold;
- font-size:12px;
+.primary{
+width:100%;
+padding:13px;
+border-radius:11px;
+color:#fff;
+font-size:12px;
+font-weight:bold;
+background:linear-gradient(135deg,#6418bd,#9438e5);
 }
 
-.auth-note{
- text-align:center;
- color:#999;
- font-size:9px;
- line-height:1.5;
- margin-top:15px;
+.note{
+text-align:center;
+color:#999;
+font-size:9px;
+line-height:1.5;
+margin-top:15px;
 }
 
 .header{
- background:#fff;
- padding:17px 18px 13px;
- display:flex;
- align-items:center;
- justify-content:space-between;
+background:#fff;
+padding:16px 18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .brand{
- display:flex;
- align-items:center;
- gap:11px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .logo{
- width:46px;
- height:46px;
- border-radius:15px;
- background:linear-gradient(135deg,#ffbd22,#8c2fe0);
- color:white;
- display:grid;
- place-items:center;
- font-size:22px;
- font-weight:900;
- box-shadow:0 7px 18px #7623c52c;
+width:45px;
+height:45px;
+border-radius:14px;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#ffbd25,#8d30df);
+color:white;
+font-weight:bold;
+font-size:20px;
 }
 
 .brand h1{
- font-size:23px;
+font-size:22px;
 }
 
 .brand p{
- color:#958e9f;
- font-size:11px;
- margin-top:3px;
+font-size:10px;
+color:#999;
+margin-top:3px;
 }
 
 .bell{
- width:42px;
- height:42px;
- border-radius:14px;
- background:#f4effa;
- font-size:20px;
+width:42px;
+height:42px;
+border-radius:13px;
+background:#f2edf8;
+font-size:19px;
 }
 
 .page{
- display:none;
- padding:15px 17px;
+display:none;
+padding:15px 17px;
 }
 
 .page.active{
- display:block;
+display:block;
 }
 
 .hero{
- position:relative;
- overflow:hidden;
- min-height:175px;
- padding:23px;
- border-radius:27px;
- color:#fff;
- background:
- radial-gradient(circle at 90% 10%,#d87cff 0,transparent 27%),
- radial-gradient(circle at 10% 100%,#4610a3 0,transparent 38%),
- linear-gradient(135deg,#5010ae,#9136e7);
- box-shadow:0 17px 35px #671ab72d;
-}
-
-.hero-content{
- position:relative;
- z-index:2;
+padding:23px;
+min-height:175px;
+border-radius:27px;
+color:#fff;
+background:
+radial-gradient(circle at 90% 10%,#d477ff 0,transparent 27%),
+linear-gradient(135deg,#5010ae,#9136e7);
+box-shadow:0 17px 35px #671ab72d;
 }
 
 .hero-label{
- font-size:11px;
- opacity:.78;
- letter-spacing:1px;
- font-weight:bold;
+font-size:10px;
+letter-spacing:1px;
+opacity:.8;
+font-weight:bold;
 }
 
 .hero h2{
- font-size:35px;
- margin:10px 0 5px;
+font-size:34px;
+margin:10px 0 5px;
 }
 
 .hero p{
- font-size:11px;
- opacity:.78;
+font-size:10px;
+opacity:.8;
 }
 
 .hero-actions{
- display:flex;
- gap:9px;
- margin-top:19px;
+display:flex;
+gap:9px;
+margin-top:18px;
 }
 
 .hero-actions button{
- padding:10px 17px;
- border-radius:11px;
- background:#fff;
- color:#6319ba;
- font-size:11px;
- font-weight:bold;
+padding:10px 15px;
+border-radius:10px;
+background:#fff;
+color:#6418b9;
+font-size:10px;
+font-weight:bold;
 }
 
 .stats{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:9px;
- margin-top:13px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+margin-top:12px;
 }
 
 .stat{
- background:#fff;
- border:1px solid var(--line);
- border-radius:16px;
- padding:13px 9px;
- text-align:center;
-}
-
-.stat-icon{
- font-size:19px;
+background:#fff;
+border:1px solid #ebe5f2;
+border-radius:16px;
+padding:13px 7px;
+text-align:center;
 }
 
 .stat strong{
- display:block;
- font-size:14px;
- margin-top:5px;
+display:block;
+font-size:13px;
+margin-top:4px;
 }
 
 .stat span{
- display:block;
- color:#999;
- font-size:9px;
- margin-top:3px;
+display:block;
+font-size:9px;
+color:#999;
+margin-top:3px;
 }
 
 .section-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin:22px 2px 10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:21px 2px 10px;
 }
 
 .section-head h2{
- font-size:18px;
+font-size:18px;
 }
 
 .section-head button{
- background:none;
- color:var(--purple);
- font-size:11px;
- font-weight:bold;
+background:none;
+color:#681ac0;
+font-size:10px;
+font-weight:bold;
 }
 
 .grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:10px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
 }
 
 .quick{
- min-height:105px;
- border-radius:18px;
- background:#fff;
- border:1px solid var(--line);
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- gap:8px;
+min-height:104px;
+border-radius:18px;
+background:#fff;
+border:1px solid #ebe5f2;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:8px;
 }
 
 .quick-icon{
- width:42px;
- height:42px;
- border-radius:14px;
- display:grid;
- place-items:center;
- font-size:21px;
+width:42px;
+height:42px;
+border-radius:13px;
+display:grid;
+place-items:center;
+font-size:20px;
 }
 
 .q1{background:#eee3ff}
 .q2{background:#fff0cf}
-.q3{background:#e5f8ec}
+.q3{background:#e4f8eb}
 .q4{background:#ffe7e7}
-.q5{background:#e6f0ff}
+.q5{background:#e5efff}
 .q6{background:#eeeaf9}
 
 .quick span{
- font-size:11px;
- font-weight:bold;
+font-size:10px;
+font-weight:bold;
 }
 
 .feature{
- position:relative;
- overflow:hidden;
- margin-top:16px;
- min-height:125px;
- padding:19px;
- border-radius:22px;
- color:white;
- background:
- radial-gradient(circle at 85% 30%,#c77aff 0,transparent 25%),
- linear-gradient(120deg,#201338,#56208c);
+margin-top:16px;
+padding:19px;
+min-height:125px;
+border-radius:22px;
+color:white;
+background:linear-gradient(120deg,#21143a,#57208e);
 }
 
 .feature h3{
- font-size:18px;
- position:relative;
- z-index:2;
+font-size:18px;
 }
 
 .feature p{
- max-width:225px;
- margin:7px 0 13px;
- font-size:10px;
- line-height:1.5;
- color:#ddd4e9;
- position:relative;
- z-index:2;
+max-width:235px;
+margin:7px 0 13px;
+font-size:10px;
+line-height:1.5;
+color:#ddd5e8;
 }
 
 .feature button{
- position:relative;
- z-index:2;
- padding:9px 13px;
- border-radius:9px;
- color:#5f16b7;
- background:white;
- font-size:10px;
- font-weight:bold;
-}
-
-.feature-art{
- position:absolute;
- right:17px;
- top:25px;
- width:85px;
- height:85px;
- border-radius:50%;
- background:linear-gradient(135deg,#ffcb45,#b44fff);
- opacity:.85;
+padding:9px 13px;
+border-radius:9px;
+background:#fff;
+color:#6418b9;
+font-size:10px;
+font-weight:bold;
 }
 
 .activity{
- background:#fff;
- border:1px solid var(--line);
- border-radius:19px;
- padding:4px 14px;
+background:#fff;
+border:1px solid #ebe5f2;
+border-radius:19px;
+padding:4px 14px;
 }
 
 .activity-row{
- display:flex;
- align-items:center;
- gap:11px;
- padding:13px 0;
- border-bottom:1px solid #f0edf4;
+display:flex;
+align-items:center;
+gap:11px;
+padding:13px 0;
+border-bottom:1px solid #f0edf4;
 }
 
 .activity-row:last-child{
- border-bottom:0;
+border-bottom:0;
 }
 
 .act-icon{
- width:39px;
- height:39px;
- border-radius:12px;
- background:#eee4ff;
- display:grid;
- place-items:center;
+width:39px;
+height:39px;
+border-radius:12px;
+background:#eee4ff;
+display:grid;
+place-items:center;
 }
 
 .act-info{
- flex:1;
+flex:1;
 }
 
 .act-info strong{
- display:block;
- font-size:12px;
+display:block;
+font-size:11px;
 }
 
 .act-info small{
- color:#999;
- font-size:9px;
- display:block;
- margin-top:3px;
+display:block;
+color:#999;
+font-size:9px;
+margin-top:3px;
 }
 
 .plus{
- color:#159449;
- font-size:12px;
- font-weight:bold;
+color:#159449;
+font-size:11px;
+font-weight:bold;
 }
 
 .minus{
- color:#d33939;
- font-size:12px;
- font-weight:bold;
-}
- .referral{
- position:relative;
- overflow:hidden;
- margin-top:16px;
- padding:20px;
- border-radius:22px;
- background:linear-gradient(135deg,#eee2ff,#faf8ff);
- border:1px solid #dfd1f3;
+color:#d33939;
+font-size:11px;
+font-weight:bold;
 }
 
-.referral h3{
- font-size:17px;
+.referral-box{
+margin-top:15px;
+padding:20px;
+border-radius:22px;
+background:linear-gradient(135deg,#eee2ff,#faf8ff);
+border:1px solid #dfd1f3;
 }
 
-.referral p{
- width:72%;
- color:#81798d;
- font-size:10px;
- line-height:1.5;
- margin:6px 0 12px;
+.referral-box h3{
+font-size:17px;
 }
 
-.primary{
- background:linear-gradient(135deg,#6317bd,#9234e5);
- color:#fff;
- padding:10px 14px;
- border-radius:10px;
- font-size:10px;
- font-weight:bold;
+.referral-box p{
+margin:7px 0 12px;
+font-size:10px;
+line-height:1.5;
+color:#81798d;
 }
 
-.back{
- background:none;
- color:var(--purple);
- font-size:12px;
- font-weight:bold;
- margin-bottom:13px;
-}
-
-.title{
- font-size:27px;
-}
-
-.subtitle{
- color:#918a9a;
- font-size:11px;
- margin-top:4px;
- margin-bottom:17px;
-}
-
-.plan{
- position:relative;
- overflow:hidden;
- background:#fff;
- border:1px solid var(--line);
- border-radius:21px;
- padding:18px;
- margin-bottom:11px;
-}
-
-.plan-top{
- display:flex;
- justify-content:space-between;
-}
-
-.plan h3{
- font-size:16px;
-}
-
-.price{
- color:var(--purple);
- font-size:17px;
- font-weight:bold;
-}
-
-.plan p{
- color:#888;
- font-size:10px;
- line-height:1.5;
- margin:9px 0 13px;
-}
-
-.plan button{
- background:var(--purple);
- color:white;
- padding:9px 13px;
- border-radius:9px;
- font-size:10px;
- font-weight:bold;
-}
-
-.wallet-visual{
- position:relative;
- overflow:hidden;
- padding:22px;
- border-radius:23px;
- color:#fff;
- background:linear-gradient(135deg,#34135d,#9238df);
- box-shadow:0 14px 30px #6821a42b;
-}
-
-.wallet-visual small{
- font-size:10px;
- opacity:.75;
-}
-
-.wallet-visual h2{
- font-size:32px;
- margin-top:9px;
-}
-
-.wallet-card{
- background:#fff;
- border:1px solid var(--line);
- border-radius:18px;
- padding:17px;
- margin-top:11px;
-}
-
-.wallet-card h3{
- font-size:14px;
-}
-
-.wallet-card p{
- color:#888;
- font-size:10px;
- line-height:1.5;
- margin-top:6px;
-}
-
-.profile{
- background:#fff;
- border:1px solid var(--line);
- border-radius:22px;
- padding:25px;
- text-align:center;
-}
-
-.avatar{
- width:78px;
- height:78px;
- margin:auto;
- border-radius:50%;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#ffbe25,#8930dd);
- color:#fff;
- font-size:30px;
- font-weight:bold;
-}
-
-.profile h2{
- margin-top:12px;
- font-size:20px;
-}
-
-.profile p{
- color:#999;
- font-size:11px;
- margin-top:4px;
-}
-
-.nav{
- position:fixed;
- bottom:0;
- left:50%;
- transform:translateX(-50%);
- width:min(480px,100%);
- height:76px;
- background:#fff;
- border-top:1px solid #e6e1ec;
- display:grid;
- grid-template-columns:repeat(5,1fr);
- z-index:80;
-}
-
-.nav button{
- background:#fff;
- color:#918b99;
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:center;
- gap:4px;
- font-size:9px;
-}
-
-.nav button.active{
- color:var(--purple);
- font-weight:bold;
-}
-
-.nav-icon{
- font-size:20px;
-}
-
-.modal{
- display:none;
- position:fixed;
- inset:0;
- background:#0008;
- align-items:flex-end;
- justify-content:center;
- z-index:200;
-}
-
-.modal.show{
- display:flex;
-}
-
-.modal-box{
- width:min(480px,100%);
- background:#fff;
- border-radius:25px 25px 0 0;
- padding:24px;
-}
-
-.modal-box h2{
- font-size:20px;
-}
-
-.modal-box p{
- color:#777;
- font-size:12px;
- line-height:1.5;
- margin:9px 0 19px;
-}
-
-.close{
- width:100%;
- padding:12px;
- border-radius:10px;
- background:#eeeaf3;
- font-weight:bold;
-}
-
-@media(max-width:350px){
- .grid{
-  grid-template-columns:repeat(2,1fr);
- }
+.small-btn{
+padding:10px 14px;
+border-radius:10px;
+background:#6819c2;
+color:#fff;
+font-size:10px;
+font-weight:bold;
 }
 
 </style>
@@ -706,11 +447,9 @@ button{
 
 <section id="auth" class="auth">
 
-<div class="auth-logo">C↗</div>
+<div class="logo-big">C</div>
 
-<h1 class="auth-title">
-Welcome to CAMPA
-</h1>
+<h1 class="auth-title">Welcome to CAMPA</h1>
 
 <p class="auth-sub">
 Your smart dashboard experience
@@ -718,7 +457,7 @@ Your smart dashboard experience
 
 <div class="auth-card">
 
-<div class="auth-tabs">
+<div class="tabs">
 
 <button
 id="loginTab"
@@ -738,25 +477,29 @@ Sign Up
 <div id="loginForm">
 
 <div class="field">
+
 <label>EMAIL</label>
 
 <input
 id="loginEmail"
 type="email"
 placeholder="Enter your email">
+
 </div>
 
 <div class="field">
+
 <label>PASSWORD</label>
 
 <input
 id="loginPassword"
 type="password"
-placeholder="Enter password">
+placeholder="Enter your password">
+
 </div>
 
 <button
-class="auth-btn"
+class="primary"
 onclick="loginUser()">
 Login
 </button>
@@ -766,70 +509,75 @@ Login
 <div id="signupForm" style="display:none">
 
 <div class="field">
+
 <label>FULL NAME</label>
 
 <input
 id="signupName"
 type="text"
 placeholder="Enter your name">
+
 </div>
 
 <div class="field">
+
 <label>EMAIL</label>
 
 <input
 id="signupEmail"
 type="email"
 placeholder="Enter your email">
+
 </div>
 
 <div class="field">
+
 <label>PASSWORD</label>
 
 <input
 id="signupPassword"
 type="password"
 placeholder="Create password">
+
 </div>
 
 <div class="field">
-<label>REFERRAL CODE (OPTIONAL)</label>
+
+<label>REFERRAL CODE</label>
 
 <input
 id="signupReferral"
 type="text"
-placeholder="Example: CAMPA20905">
+placeholder="Optional">
+
 </div>
 
 <button
-class="auth-btn"
+class="primary"
 onclick="signupUser()">
 Create Account
 </button>
 
 </div>
 
-<p class="auth-note">
-Your account will be securely managed by Supabase.
+<p class="note">
+Your account is securely managed through Supabase.
 </p>
 
 </div>
 
 </section>
 
-<div
-id="mainApp"
-style="display:none">
+<div id="mainApp" style="display:none">
 
 <header class="header">
 
 <div class="brand">
 
-<div class="logo">
-C↗
-</div>
+<div class="logo">C</div>
 
 <div>
+
 <h1>CAMPA</h1>
 
 <p id="welcomeName">
@@ -854,8 +602,6 @@ class="page active">
 
 <div class="hero">
 
-<div class="hero-content">
-
 <div class="hero-label">
 CAMPA WALLET
 </div>
@@ -865,20 +611,18 @@ CAMPA WALLET
 </h2>
 
 <p>
-Your dashboard is ready
+Your account dashboard
 </p>
 
 <div class="hero-actions">
 
 <button onclick="openPage('wallet')">
-View Wallet
+Wallet
 </button>
 
 <button onclick="openPage('plans')">
-Explore Plans
+Plans
 </button>
-
-</div>
 
 </div>
 
@@ -887,19 +631,16 @@ Explore Plans
 <div class="stats">
 
 <div class="stat">
-<div class="stat-icon">📈</div>
 <strong id="activityCount">0</strong>
 <span>Activities</span>
 </div>
 
 <div class="stat">
-<div class="stat-icon">👥</div>
 <strong id="referralCount">0</strong>
 <span>Referrals</span>
 </div>
 
 <div class="stat">
-<div class="stat-icon">⭐</div>
 <strong>Active</strong>
 <span>Status</span>
 </div>
@@ -916,9 +657,7 @@ Explore Plans
 class="quick"
 onclick="openPage('plans')">
 
-<div class="quick-icon q1">
-📊
-</div>
+<div class="quick-icon q1">📊</div>
 
 <span>Plans</span>
 
@@ -928,9 +667,7 @@ onclick="openPage('plans')">
 class="quick"
 onclick="openPage('wallet')">
 
-<div class="quick-icon q2">
-💰
-</div>
+<div class="quick-icon q2">💰</div>
 
 <span>Wallet</span>
 
@@ -940,9 +677,7 @@ onclick="openPage('wallet')">
 class="quick"
 onclick="openPage('deposit')">
 
-<div class="quick-icon q3">
-➕
-</div>
+<div class="quick-icon q3">➕</div>
 
 <span>Deposit</span>
 
@@ -952,9 +687,7 @@ onclick="openPage('deposit')">
 class="quick"
 onclick="openPage('withdraw')">
 
-<div class="quick-icon q4">
-↥
-</div>
+<div class="quick-icon q4">↥</div>
 
 <span>Withdraw</span>
 
@@ -964,9 +697,7 @@ onclick="openPage('withdraw')">
 class="quick"
 onclick="openPage('referral')">
 
-<div class="quick-icon q5">
-👥
-</div>
+<div class="quick-icon q5">👥</div>
 
 <span>Referral</span>
 
@@ -976,9 +707,7 @@ onclick="openPage('referral')">
 class="quick"
 onclick="openPage('history')">
 
-<div class="quick-icon q6">
-📜
-</div>
+<div class="quick-icon q6">📜</div>
 
 <span>History</span>
 
@@ -988,11 +717,7 @@ onclick="openPage('history')">
 
 <div class="feature">
 
-<div class="feature-art"></div>
-
-<h3>
-Grow With CAMPA
-</h3>
+<h3>Grow With CAMPA</h3>
 
 <p>
 Manage your account, wallet and activities from one place.
@@ -1006,9 +731,7 @@ Explore Now →
 
 <div class="section-head">
 
-<h2>
-Recent Activity
-</h2>
+<h2>Recent Activity</h2>
 
 <button onclick="openPage('history')">
 View All
@@ -1016,21 +739,15 @@ View All
 
 </div>
 
-<div
-id="recentActivity"
-class="activity">
+<div class="activity">
 
 <div class="activity-row">
 
-<div class="act-icon">
-✓
-</div>
+<div class="act-icon">✓</div>
 
 <div class="act-info">
 
-<strong>
-No activity yet
-</strong>
+<strong>No activity yet</strong>
 
 <small>
 Your activity will appear here
@@ -1042,47 +759,40 @@ Your activity will appear here
 
 </div>
 
-<div class="referral">
+<div class="referral-box">
 
-<h3>
-Invite & Connect
-</h3>
+<h3>Invite & Connect</h3>
 
 <p>
 Share your CAMPA referral code with friends.
 </p>
 
 <button
-class="primary"
+class="small-btn"
 onclick="shareReferral()">
 Share Referral
 </button>
 
 </div>
 
-</section>
+ </section>
 
-<section id="plans" class="page">
+ <section id="plans" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Plans</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">Plans</h1>
+<div class="plan-card">
 
-<p class="subtitle">
-Choose a CAMPA plan
-</p>
-
-<div class="plan">
-
-<div class="plan-top">
+<div class="plan-head">
 <h3>Starter Plan</h3>
-<span class="price">₹500</span>
+<strong>₹500</strong>
 </div>
 
 <p>
-Starter plan for the CAMPA platform.
+Starter plan for your CAMPA account.
 </p>
 
 <button onclick="selectPlan('Starter Plan',500)">
@@ -1091,15 +801,16 @@ Select Plan
 
 </div>
 
-<div class="plan">
 
-<div class="plan-top">
+<div class="plan-card">
+
+<div class="plan-head">
 <h3>Growth Plan</h3>
-<span class="price">₹1,000</span>
+<strong>₹1,000</strong>
 </div>
 
 <p>
-Growth plan with a larger demo allocation.
+Growth plan with a higher account allocation.
 </p>
 
 <button onclick="selectPlan('Growth Plan',1000)">
@@ -1108,15 +819,16 @@ Select Plan
 
 </div>
 
-<div class="plan">
 
-<div class="plan-top">
+<div class="plan-card">
+
+<div class="plan-head">
 <h3>Premium Plan</h3>
-<span class="price">₹2,500</span>
+<strong>₹2,500</strong>
 </div>
 
 <p>
-Premium plan for the complete CAMPA experience.
+Premium account plan for advanced users.
 </p>
 
 <button onclick="selectPlan('Premium Plan',2500)">
@@ -1130,44 +842,41 @@ Select Plan
 
 <section id="wallet" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>My Wallet</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">My Wallet</h1>
+<div class="wallet-box">
 
-<p class="subtitle">
-Your account balance
-</p>
-
-<div class="wallet-visual">
-
-<small>
-AVAILABLE BALANCE
-</small>
+<small>AVAILABLE BALANCE</small>
 
 <h2 id="walletBalance">
 ₹0.00
 </h2>
 
-</div>
-
-<div class="wallet-card">
-
-<h3>Wallet Status</h3>
-
 <p>
-Your wallet is connected to your CAMPA account.
+Your current account balance
 </p>
 
 </div>
 
-<div class="wallet-card">
+<div class="info-card">
 
-<h3>Transactions</h3>
+<h3>Wallet</h3>
 
 <p>
-Your deposits, withdrawals and other account activity will appear in your history.
+Your wallet activity and balance will be displayed here.
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h3>Account Status</h3>
+
+<p>
+Your CAMPA account is currently active.
 </p>
 
 </div>
@@ -1177,17 +886,18 @@ Your deposits, withdrawals and other account activity will appear in your histor
 
 <section id="deposit" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Deposit</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">Deposit</h1>
+<div class="form-card">
 
-<p class="subtitle">
-Add funds to your account
+<h3>Add Funds</h3>
+
+<p>
+Enter the amount you want to deposit.
 </p>
-
-<div class="auth-card">
 
 <div class="field">
 
@@ -1202,7 +912,7 @@ placeholder="Enter amount">
 </div>
 
 <button
-class="auth-btn"
+class="primary"
 onclick="submitDeposit()">
 Continue
 </button>
@@ -1214,17 +924,18 @@ Continue
 
 <section id="withdraw" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Withdraw</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">Withdraw</h1>
+<div class="form-card">
 
-<p class="subtitle">
-Request a withdrawal
+<h3>Withdrawal Request</h3>
+
+<p>
+Enter your withdrawal details.
 </p>
-
-<div class="auth-card">
 
 <div class="field">
 
@@ -1250,7 +961,7 @@ placeholder="example@upi">
 </div>
 
 <button
-class="auth-btn"
+class="primary"
 onclick="submitWithdraw()">
 Submit Request
 </button>
@@ -1262,53 +973,52 @@ Submit Request
 
 <section id="referral" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Referral</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">Referral</h1>
+<div class="referral-box">
 
-<p class="subtitle">
-Invite your friends
+<h3>Your Referral Code</h3>
+
+<p>
+Share your unique code with friends.
 </p>
 
-<div class="wallet-visual">
-
-<small>
-YOUR REFERRAL CODE
-</small>
-
-<h2
+<div
 id="referralCode"
-style="font-size:25px">
+style="
+background:#fff;
+border:1px dashed #8c54c5;
+border-radius:12px;
+padding:14px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#6418b9;
+margin:15px 0;">
 CAMPA
-</h2>
-
-<br>
+</div>
 
 <button
-style="
-padding:10px 15px;
-border-radius:10px;
-color:#6415bd;
-background:#fff;
-font-weight:bold"
+class="small-btn"
 onclick="shareReferral()">
 Share Code
 </button>
 
 </div>
 
-<div class="wallet-card">
+<div class="info-card">
 
 <h3>Total Referrals</h3>
 
 <p
 id="referralTotal"
 style="
-font-size:25px;
-color:#6415bd;
-font-weight:bold">
+font-size:24px;
+font-weight:bold;
+color:#6819c2;">
 0
 </p>
 
@@ -1319,15 +1029,10 @@ font-weight:bold">
 
 <section id="history" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
-
-<h1 class="title">History</h1>
-
-<p class="subtitle">
-Your account activity
-</p>
+<div class="section-head">
+<h2>History</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
 <div
 id="historyList"
@@ -1341,12 +1046,10 @@ class="activity">
 
 <div class="act-info">
 
-<strong>
-No transactions yet
-</strong>
+<strong>No transactions yet</strong>
 
 <small>
-Your activity will appear here
+Your account history will appear here.
 </small>
 
 </div>
@@ -1360,38 +1063,27 @@ Your activity will appear here
 
 <section id="notifications" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Notifications</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">
-Notifications
-</h1>
+<div class="info-card">
 
-<p class="subtitle">
-CAMPA updates
-</p>
-
-<div class="wallet-card">
-
-<h3>
-🎉 Welcome to CAMPA
-</h3>
+<h3>🎉 Welcome to CAMPA</h3>
 
 <p>
-Your account is ready.
+Your account dashboard is ready.
 </p>
 
 </div>
 
-<div class="wallet-card">
+<div class="info-card">
 
-<h3>
-🔐 Secure Account
-</h3>
+<h3>🔐 Account Security</h3>
 
 <p>
-Your login is handled through Supabase Authentication.
+Keep your login details private and never share your password.
 </p>
 
 </div>
@@ -1401,21 +1093,14 @@ Your login is handled through Supabase Authentication.
 
 <section id="profile" class="page">
 
-<button class="back" onclick="openPage('home')">
-← Back
-</button>
+<div class="section-head">
+<h2>Profile</h2>
+<button onclick="openPage('home')">Back</button>
+</div>
 
-<h1 class="title">
-Profile
-</h1>
+<div class="profile-card">
 
-<p class="subtitle">
-Your account information
-</p>
-
-<div class="profile">
-
-<div class="avatar">
+<div class="profile-avatar">
 C
 </div>
 
@@ -1426,8 +1111,6 @@ CAMPA User
 <p id="profileEmail">
 Loading...
 </p>
-
-<br>
 
 <button
 class="primary"
@@ -1440,16 +1123,120 @@ Logout
 </section>
 
 
-<nav class="nav">
+<style>
+
+.plan-card,
+.info-card,
+.form-card,
+.profile-card{
+background:#fff;
+border:1px solid #ebe5f2;
+border-radius:19px;
+padding:18px;
+margin-bottom:12px;
+}
+
+.plan-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.plan-head h3{
+font-size:16px;
+}
+
+.plan-head strong{
+font-size:16px;
+color:#6819c2;
+}
+
+.plan-card p,
+.info-card p,
+.form-card p{
+font-size:10px;
+color:#89818f;
+line-height:1.5;
+margin:8px 0 14px;
+}
+
+.plan-card button{
+padding:10px 14px;
+border-radius:10px;
+background:#6819c2;
+color:#fff;
+font-size:10px;
+font-weight:bold;
+}
+
+.wallet-box{
+padding:24px;
+border-radius:22px;
+color:#fff;
+background:linear-gradient(135deg,#5511b2,#9438e5);
+margin-bottom:14px;
+}
+
+.wallet-box small{
+font-size:9px;
+opacity:.8;
+}
+
+.wallet-box h2{
+font-size:32px;
+margin:9px 0;
+}
+
+.wallet-box p{
+font-size:10px;
+opacity:.8;
+}
+
+.form-card h3{
+font-size:18px;
+}
+
+.profile-card{
+text-align:center;
+}
+
+.profile-avatar{
+width:70px;
+height:70px;
+margin:0 auto 12px;
+border-radius:22px;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#6418bd,#9b3bea);
+color:#fff;
+font-size:28px;
+font-weight:bold;
+}
+
+.profile-card h2{
+font-size:20px;
+margin-bottom:5px;
+}
+
+.profile-card p{
+font-size:11px;
+color:#999;
+margin-bottom:20px;
+}
+
+</style>
+
+
+<nav
+class="bottom-nav">
 
 <button
 id="nav-home"
 class="active"
 onclick="openPage('home')">
 
-<div class="nav-icon">⌂</div>
-
-<span>Home</span>
+<span>⌂</span>
+<small>Home</small>
 
 </button>
 
@@ -1457,9 +1244,8 @@ onclick="openPage('home')">
 id="nav-plans"
 onclick="openPage('plans')">
 
-<div class="nav-icon">▣</div>
-
-<span>Plans</span>
+<span>▣</span>
+<small>Plans</small>
 
 </button>
 
@@ -1467,9 +1253,8 @@ onclick="openPage('plans')">
 id="nav-wallet"
 onclick="openPage('wallet')">
 
-<div class="nav-icon">▤</div>
-
-<span>Wallet</span>
+<span>▤</span>
+<small>Wallet</small>
 
 </button>
 
@@ -1477,9 +1262,8 @@ onclick="openPage('wallet')">
 id="nav-referral"
 onclick="openPage('referral')">
 
-<div class="nav-icon">♧</div>
-
-<span>Referral</span>
+<span>♧</span>
+<small>Referral</small>
 
 </button>
 
@@ -1487,46 +1271,63 @@ onclick="openPage('referral')">
 id="nav-profile"
 onclick="openPage('profile')">
 
-<div class="nav-icon">●</div>
-
-<span>Profile</span>
+<span>●</span>
+<small>Profile</small>
 
 </button>
 
 </nav>
 
-</div>
-
-</div>
-
-
-<div
-id="modal"
-class="modal">
-
-<div class="modal-box">
-
-<h2 id="modalTitle">
-CAMPA
-</h2>
-
-<p id="modalText"></p>
-
-<button
-class="close"
-onclick="closeModal()">
-Close
-</button>
-
-</div>
-
  </div>
 
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <style>
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(480px,100%);
+height:72px;
+background:#fff;
+border-top:1px solid #e8e2ee;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+z-index:100;
+}
+
+.bottom-nav button{
+background:#fff;
+color:#938c9c;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:4px;
+}
+
+.bottom-nav button.active{
+color:#6819c2;
+}
+
+.bottom-nav span{
+font-size:20px;
+}
+
+.bottom-nav small{
+font-size:9px;
+font-weight:bold;
+}
+
+/* SUPABASE CONNECTION */
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
+const SUPABASE_URL =
+"PASTE_YOUR_PROJECT_URL_HERE";
 
 const SUPABASE_PUBLISHABLE_KEY =
 "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
@@ -1538,6 +1339,8 @@ SUPABASE_PUBLISHABLE_KEY
 );
 
 
+/* AUTH TABS */
+
 function showAuth(type){
 
 const loginForm =
@@ -1554,9 +1357,9 @@ document.getElementById("signupTab");
 
 if(type === "login"){
 
-loginForm.style.display = "block";
+loginForm.style.display="block";
 
-signupForm.style.display = "none";
+signupForm.style.display="none";
 
 loginTab.classList.add("active");
 
@@ -1564,9 +1367,9 @@ signupTab.classList.remove("active");
 
 }else{
 
-loginForm.style.display = "none";
+loginForm.style.display="none";
 
-signupForm.style.display = "block";
+signupForm.style.display="block";
 
 loginTab.classList.remove("active");
 
@@ -1576,6 +1379,8 @@ signupTab.classList.add("active");
 
 }
 
+
+/* SIGN UP */
 
 async function signupUser(){
 
@@ -1609,7 +1414,9 @@ return;
 
 if(password.length < 6){
 
-alert("Password must contain at least 6 characters.");
+alert(
+"Password must contain at least 6 characters."
+);
 
 return;
 
@@ -1617,7 +1424,7 @@ return;
 
 try{
 
-const {data,error} =
+const result =
 await supabaseClient.auth.signUp({
 
 email:email,
@@ -1632,26 +1439,29 @@ full_name:name
 
 });
 
-if(error){
+if(result.error){
 
-alert(error.message);
+alert(result.error.message);
 
 return;
 
 }
 
-if(data.user){
-
-document.getElementById("signupPassword")
-.value = "";
-
 alert(
-"Account created successfully. Check your email if email confirmation is enabled."
+"Account created successfully."
 );
 
-}
+showAuth("login");
+
+document.getElementById("loginEmail")
+.value=email;
+
+document.getElementById("signupPassword")
+.value="";
 
 }catch(error){
+
+console.error(error);
 
 alert(
 "Something went wrong. Please try again."
@@ -1661,6 +1471,8 @@ alert(
 
 }
 
+
+/* LOGIN */
 
 async function loginUser(){
 
@@ -1690,7 +1502,7 @@ return;
 
 try{
 
-const {data,error} =
+const result =
 await supabaseClient.auth.signInWithPassword({
 
 email:email,
@@ -1699,505 +1511,23 @@ password:password
 
 });
 
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-if(data.user){
-
-loadUser(data.user);
-
-}
-
-}catch(error){
-
-alert(
-"Login failed. Please try again."
-);
-
-}
-
-}
-
-
-async function loadUser(user){
-
-if(!user){
-
-const result =
-await supabaseClient.auth.getUser();
-
 if(result.error){
 
-showAuth("login");
+alert(result.error.message);
 
 return;
 
 }
 
-user = result.data.user;
+if(result.data.user){
 
-}
-
-document.getElementById("auth")
-.style.display = "none";
-
-document.getElementById("mainApp")
-.style.display = "block";
-
-const metadata =
-user.user_metadata || {};
-
-const name =
-metadata.full_name ||
-user.email.split("@")[0];
-
-document.getElementById("welcomeName")
-.innerText =
-"Welcome, " + name + " 👋";
-
-document.getElementById("profileName")
-.innerText =
-name;
-
-document.getElementById("profileEmail")
-.innerText =
-user.email;
-
-const referralCode =
-"CAMPA" +
-user.id
-.replace(/-/g,"")
-.substring(0,6)
-.toUpperCase();
-
-document.getElementById("referralCode")
-.innerText =
-referralCode;
-
-}
-
-
-async function logoutUser(){
-
-const {error} =
-await supabaseClient.auth.signOut();
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-document.getElementById("mainApp")
-.style.display = "none";
-
-document.getElementById("auth")
-.style.display = "flex";
-
-showAuth("login");
-
-}
-
-
-async function checkSession(){
-
-const {data} =
-await supabaseClient.auth.getSession();
-
-if(data.session){
-
-loadUser(data.session.user);
-
-}else{
-
-document.getElementById("auth")
-.style.display = "flex";
-
-document.getElementById("mainApp")
-.style.display = "none";
-
-}
-
-}
-
-
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
-
-if(session){
-
-loadUser(session.user);
-
-}
-
-});
-
-
-async function selectPlan(name,amount){
-
-document.getElementById("modalTitle")
-.innerText =
-name;
-
-document.getElementById("modalText")
-.innerText =
-"Selected plan: " +
-name +
-" — ₹" +
-amount +
-". Payment integration will be connected separately.";
-
-document.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-function closeModal(){
-
-document.getElementById("modal")
-.classList.remove("show");
-
-}
-
-
-function openPage(page){
-
-const pages = [
-
-"home",
-"plans",
-"wallet",
-"deposit",
-"withdraw",
-"referral",
-"history",
-"notifications",
-"profile"
-
-];
-
-pages.forEach(function(id){
-
-const element =
-document.getElementById(id);
-
-if(element){
-
-element.classList.remove("active");
-
-}
-
-});
-
-const selected =
-document.getElementById(page);
-
-if(selected){
-
-selected.classList.add("active");
-
-}
-
-document.querySelectorAll(".nav button")
-.forEach(function(button){
-
-button.classList.remove("active");
-
-});
-
-const nav =
-document.getElementById("nav-" + page);
-
-if(nav){
-
-nav.classList.add("active");
-
-}
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-function shareReferral(){
-
-const code =
-document.getElementById("referralCode")
-.innerText;
-
-const text =
-"Join CAMPA using my referral code: " +
-code;
-
-if(navigator.share){
-
-navigator.share({
-
-title:"CAMPA Referral",
-
-text:text
-
-});
-
-}else if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(text)
-.then(function(){
-
-alert(
-"Referral code copied!"
-);
-
-});
-
-}else{
-
-alert(text);
-
-}
-
-}
-
-
-function submitDeposit(){
-
-const amount =
-document.getElementById("depositAmount")
-.value;
-
-if(!amount || Number(amount) <= 0){
-
-alert(
-"Please enter a valid amount."
-);
-
-return;
-
-}
-
-document.getElementById("modalTitle")
-.innerText =
-"Deposit Request";
-
-document.getElementById("modalText")
-.innerText =
-"Deposit request for ₹" +
-amount +
-" is ready. Payment gateway will be connected in the next stage.";
-
-document.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-function submitWithdraw(){
-
-const amount =
-document.getElementById("withdrawAmount")
-.value;
-
-const account =
-document.getElementById("withdrawAccount")
-.value.trim();
-
-if(!amount || Number(amount) <= 0){
-
-alert(
-"Please enter a valid amount."
-);
-
-return;
-
-}
-
-if(!account){
-
-alert(
-"Please enter your UPI ID or account."
-);
-
-return;
-
-}
-
-document.getElementById("modalTitle")
-.innerText =
-"Withdrawal Request";
-
-document.getElementById("modalText")
-.innerText =
-"Your withdrawal request has been prepared. Real-money payout processing requires a secure backend/payment integration.";
-
-document.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-document.getElementById("modal")
-.addEventListener(
-"click",
-function(event){
-
-if(event.target === this){
-
-closeModal();
-
-}
-
-});
-
-
-checkSession();
-
-</script>
-
-</body>
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =  https://tkpanotfjfiabjjznkxq.supabase.co/rest/v1/
-
-const SUPABASE_PUBLISHABLE_KEY =
-sb_publishable_g1W2F-S5qfcd7Etk22UBsQ_WEN6OvT4
- 
-const supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_PUBLISHABLE_KEY
-);
-
-
-function showAuth(type){
-
-const loginForm =
-document.getElementById("loginForm");
-
-const signupForm =
-document.getElementById("signupForm");
-
-const loginTab =
-document.getElementById("loginTab");
-
-const signupTab =
-document.getElementById("signupTab");
-
-if(type === "login"){
-
-loginForm.style.display = "block";
-
-signupForm.style.display = "none";
-
-loginTab.classList.add("active");
-
-signupTab.classList.remove("active");
-
-}else{
-
-loginForm.style.display = "none";
-
-signupForm.style.display = "block";
-
-loginTab.classList.remove("active");
-
-signupTab.classList.add("active");
-
-}
-
-}
-
-
-async function signupUser(){
-
-const name =
-document.getElementById("signupName")
-.value.trim();
-
-const email =
-document.getElementById("signupEmail")
-.value.trim();
-
-const password =
-document.getElementById("signupPassword")
-.value;
-
-if(!name){
-
-alert("Please enter your name.");
-
-return;
-
-}
-
-if(!email){
-
-alert("Please enter your email.");
-
-return;
-
-}
-
-if(password.length < 6){
-
-alert("Password must contain at least 6 characters.");
-
-return;
-
-}
-
-try{
-
-const {data,error} =
-await supabaseClient.auth.signUp({
-
-email:email,
-
-password:password,
-
-options:{
-data:{
-full_name:name
-}
-}
-
-});
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-if(data.user){
-
-document.getElementById("signupPassword")
-.value = "";
-
-alert(
-"Account created successfully. Check your email if email confirmation is enabled."
-);
+loadUser(result.data.user);
 
 }
 
 }catch(error){
+
+console.error(error);
 
 alert(
 "Something went wrong. Please try again."
@@ -2208,92 +1538,21 @@ alert(
 }
 
 
-async function loginUser(){
+/* LOAD USER */
 
-const email =
-document.getElementById("loginEmail")
-.value.trim();
-
-const password =
-document.getElementById("loginPassword")
-.value;
-
-if(!email){
-
-alert("Please enter your email.");
-
-return;
-
-}
-
-if(!password){
-
-alert("Please enter your password.");
-
-return;
-
-}
-
-try{
-
-const {data,error} =
-await supabaseClient.auth.signInWithPassword({
-
-email:email,
-
-password:password
-
-});
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-if(data.user){
-
-loadUser(data.user);
-
-}
-
-}catch(error){
-
-alert(
-"Login failed. Please try again."
-);
-
-}
-
-}
-
-
-async function loadUser(user){
+function loadUser(user){
 
 if(!user){
 
-const result =
-await supabaseClient.auth.getUser();
-
-if(result.error){
-
-showAuth("login");
-
 return;
-
-}
-
-user = result.data.user;
 
 }
 
 document.getElementById("auth")
-.style.display = "none";
+.style.display="none";
 
 document.getElementById("mainApp")
-.style.display = "block";
+.style.display="block";
 
 const metadata =
 user.user_metadata || {};
@@ -2314,7 +1573,10 @@ document.getElementById("profileEmail")
 .innerText =
 user.email;
 
-const referralCode =
+
+/* REFERRAL CODE */
+
+const code =
 "CAMPA" +
 user.id
 .replace(/-/g,"")
@@ -2322,102 +1584,76 @@ user.id
 .toUpperCase();
 
 document.getElementById("referralCode")
-.innerText =
-referralCode;
+.innerText=code;
 
 }
 
 
+/* CHECK LOGIN SESSION */
+
+async function checkSession(){
+
+try{
+
+const result =
+await supabaseClient.auth.getSession();
+
+if(result.data.session){
+
+loadUser(
+result.data.session.user
+);
+
+}else{
+
+document.getElementById("auth")
+.style.display="flex";
+
+document.getElementById("mainApp")
+.style.display="none";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* LOGOUT */
+
 async function logoutUser(){
 
-const {error} =
+const result =
 await supabaseClient.auth.signOut();
 
-if(error){
+if(result.error){
 
-alert(error.message);
+alert(result.error.message);
 
 return;
 
 }
 
 document.getElementById("mainApp")
-.style.display = "none";
+.style.display="none";
 
 document.getElementById("auth")
-.style.display = "flex";
+.style.display="flex";
 
 showAuth("login");
 
 }
 
 
-async function checkSession(){
-
-const {data} =
-await supabaseClient.auth.getSession();
-
-if(data.session){
-
-loadUser(data.session.user);
-
-}else{
-
-document.getElementById("auth")
-.style.display = "flex";
-
-document.getElementById("mainApp")
-.style.display = "none";
-
-}
-
-}
-
-
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
-
-if(session){
-
-loadUser(session.user);
-
-}
-
-});
-
-
-async function selectPlan(name,amount){
-
-document.getElementById("modalTitle")
-.innerText =
-name;
-
-document.getElementById("modalText")
-.innerText =
-"Selected plan: " +
-name +
-" — ₹" +
-amount +
-". Payment integration will be connected separately.";
-
-document.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-function closeModal(){
-
-document.getElementById("modal")
-.classList.remove("show");
-
-}
-
+/* PAGE NAVIGATION */
 
 function openPage(page){
 
-const pages = [
-
+const pages=[
 "home",
 "plans",
 "wallet",
@@ -2427,7 +1663,6 @@ const pages = [
 "history",
 "notifications",
 "profile"
-
 ];
 
 pages.forEach(function(id){
@@ -2452,15 +1687,18 @@ selected.classList.add("active");
 
 }
 
-document.querySelectorAll(".nav button")
-.forEach(function(button){
+document.querySelectorAll(
+".bottom-nav button"
+).forEach(function(button){
 
 button.classList.remove("active");
 
 });
 
 const nav =
-document.getElementById("nav-" + page);
+document.getElementById(
+"nav-" + page
+);
 
 if(nav){
 
@@ -2468,62 +1706,36 @@ nav.classList.add("active");
 
 }
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+window.scrollTo(0,0);
 
 }
 
 
-function shareReferral(){
+/* PLAN */
 
-const code =
-document.getElementById("referralCode")
-.innerText;
-
-const text =
-"Join CAMPA using my referral code: " +
-code;
-
-if(navigator.share){
-
-navigator.share({
-
-title:"CAMPA Referral",
-
-text:text
-
-});
-
-}else if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(text)
-.then(function(){
+function selectPlan(name,amount){
 
 alert(
-"Referral code copied!"
+name +
+" selected — ₹" +
+amount +
+"."
 );
 
-});
-
-}else{
-
-alert(text);
-
 }
 
-}
 
+/* DEPOSIT */
 
 function submitDeposit(){
 
 const amount =
-document.getElementById("depositAmount")
-.value;
+document.getElementById(
+"depositAmount"
+).value;
 
-if(!amount || Number(amount) <= 0){
+if(!amount ||
+Number(amount)<=0){
 
 alert(
 "Please enter a valid amount."
@@ -2533,33 +1745,31 @@ return;
 
 }
 
-document.getElementById("modalTitle")
-.innerText =
-"Deposit Request";
-
-document.getElementById("modalText")
-.innerText =
+alert(
 "Deposit request for ₹" +
 amount +
-" is ready. Payment gateway will be connected in the next stage.";
-
-document.getElementById("modal")
-.classList.add("show");
+" received."
+);
 
 }
 
 
+/* WITHDRAW */
+
 function submitWithdraw(){
 
 const amount =
-document.getElementById("withdrawAmount")
-.value;
+document.getElementById(
+"withdrawAmount"
+).value;
 
 const account =
-document.getElementById("withdrawAccount")
-.value.trim();
+document.getElementById(
+"withdrawAccount"
+).value.trim();
 
-if(!amount || Number(amount) <= 0){
+if(!amount ||
+Number(amount)<=0){
 
 alert(
 "Please enter a valid amount."
@@ -2579,37 +1789,68 @@ return;
 
 }
 
-document.getElementById("modalTitle")
-.innerText =
-"Withdrawal Request";
-
-document.getElementById("modalText")
-.innerText =
-"Your withdrawal request has been prepared. Real-money payout processing requires a secure backend/payment integration.";
-
-document.getElementById("modal")
-.classList.add("show");
+alert(
+"Withdrawal request for ₹" +
+amount +
+" received."
+);
 
 }
 
 
-document.getElementById("modal")
-.addEventListener(
-"click",
-function(event){
+/* REFERRAL SHARE */
 
-if(event.target === this){
+async function shareReferral(){
 
-closeModal();
+const code =
+document.getElementById(
+"referralCode"
+).innerText;
 
-}
+const text =
+"Join CAMPA using my referral code: " +
+code;
+
+try{
+
+if(navigator.share){
+
+await navigator.share({
+
+title:"CAMPA Referral",
+
+text:text
 
 });
 
+}else if(
+navigator.clipboard
+){
+
+await navigator.clipboard
+.writeText(text);
+
+alert(
+"Referral code copied!"
+);
+
+}else{
+
+alert(text);
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* START */
 
 checkSession();
 
 </script>
-
-</body>
-</html>
