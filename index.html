@@ -1280,7 +1280,7 @@ onclick="openPage('profile')">
 
  </div>
 
- <style>
+<style>
 .bottom-nav{
 position:fixed;
 bottom:0;
@@ -1317,9 +1317,6 @@ font-size:20px;
 font-size:9px;
 font-weight:bold;
 }
-
-/* SUPABASE CONNECTION */
-
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1327,10 +1324,10 @@ font-weight:bold;
 <script>
 
 const SUPABASE_URL =
-"PASTE_YOUR_PROJECT_URL_HERE";
+"https://tkpanotfjfiabjjznkxq.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+"sb_publishable_g1W2F-S5qfcd7Etk22UBsQ_WEN6OvT4";
 
 const supabaseClient =
 window.supabase.createClient(
@@ -1338,97 +1335,59 @@ SUPABASE_URL,
 SUPABASE_PUBLISHABLE_KEY
 );
 
-
-/* AUTH TABS */
-
 function showAuth(type){
 
-const loginForm =
-document.getElementById("loginForm");
+const loginForm=document.getElementById("loginForm");
+const signupForm=document.getElementById("signupForm");
+const loginTab=document.getElementById("loginTab");
+const signupTab=document.getElementById("signupTab");
 
-const signupForm =
-document.getElementById("signupForm");
-
-const loginTab =
-document.getElementById("loginTab");
-
-const signupTab =
-document.getElementById("signupTab");
-
-if(type === "login"){
+if(type==="login"){
 
 loginForm.style.display="block";
-
 signupForm.style.display="none";
 
 loginTab.classList.add("active");
-
 signupTab.classList.remove("active");
 
 }else{
 
 loginForm.style.display="none";
-
 signupForm.style.display="block";
 
 loginTab.classList.remove("active");
-
 signupTab.classList.add("active");
 
 }
 
 }
 
-
-/* SIGN UP */
-
 async function signupUser(){
 
-const name =
-document.getElementById("signupName")
-.value.trim();
-
-const email =
-document.getElementById("signupEmail")
-.value.trim();
-
-const password =
-document.getElementById("signupPassword")
-.value;
+const name=document.getElementById("signupName").value.trim();
+const email=document.getElementById("signupEmail").value.trim();
+const password=document.getElementById("signupPassword").value;
 
 if(!name){
-
 alert("Please enter your name.");
-
 return;
-
 }
 
 if(!email){
-
 alert("Please enter your email.");
-
 return;
-
 }
 
-if(password.length < 6){
-
-alert(
-"Password must contain at least 6 characters."
-);
-
+if(password.length<6){
+alert("Password must contain at least 6 characters.");
 return;
-
 }
 
 try{
 
-const result =
-await supabaseClient.auth.signUp({
+const result=await supabaseClient.auth.signUp({
 
 email:email,
-
 password:password,
 
 options:{
@@ -1440,177 +1399,104 @@ full_name:name
 });
 
 if(result.error){
-
 alert(result.error.message);
-
 return;
-
 }
 
-alert(
-"Account created successfully."
-);
+alert("Account created successfully.");
 
 showAuth("login");
 
-document.getElementById("loginEmail")
-.value=email;
-
-document.getElementById("signupPassword")
-.value="";
+document.getElementById("loginEmail").value=email;
 
 }catch(error){
 
 console.error(error);
 
-alert(
-"Something went wrong. Please try again."
-);
+alert("Something went wrong. Please try again.");
 
 }
 
 }
-
-
-/* LOGIN */
 
 async function loginUser(){
 
-const email =
-document.getElementById("loginEmail")
-.value.trim();
-
-const password =
-document.getElementById("loginPassword")
-.value;
+const email=document.getElementById("loginEmail").value.trim();
+const password=document.getElementById("loginPassword").value;
 
 if(!email){
-
 alert("Please enter your email.");
-
 return;
-
 }
 
 if(!password){
-
 alert("Please enter your password.");
-
 return;
-
 }
 
 try{
 
-const result =
-await supabaseClient.auth.signInWithPassword({
-
+const result=await supabaseClient.auth.signInWithPassword({
 email:email,
-
 password:password
-
 });
 
 if(result.error){
-
 alert(result.error.message);
-
 return;
-
 }
 
 if(result.data.user){
-
 loadUser(result.data.user);
-
 }
 
 }catch(error){
 
 console.error(error);
 
-alert(
-"Something went wrong. Please try again."
-);
+alert("Something went wrong. Please try again.");
 
 }
 
 }
-
-
-/* LOAD USER */
 
 function loadUser(user){
 
-if(!user){
+if(!user)return;
 
-return;
+document.getElementById("auth").style.display="none";
+document.getElementById("mainApp").style.display="block";
 
-}
+const metadata=user.user_metadata||{};
+const name=metadata.full_name||user.email.split("@")[0];
 
-document.getElementById("auth")
-.style.display="none";
+document.getElementById("welcomeName").innerText=
+"Welcome, "+name+" 👋";
 
-document.getElementById("mainApp")
-.style.display="block";
+document.getElementById("profileName").innerText=name;
+document.getElementById("profileEmail").innerText=user.email;
 
-const metadata =
-user.user_metadata || {};
+const code="CAMPA"+
+user.id.replace(/-/g,"").substring(0,6).toUpperCase();
 
-const name =
-metadata.full_name ||
-user.email.split("@")[0];
-
-document.getElementById("welcomeName")
-.innerText =
-"Welcome, " + name + " 👋";
-
-document.getElementById("profileName")
-.innerText =
-name;
-
-document.getElementById("profileEmail")
-.innerText =
-user.email;
-
-
-/* REFERRAL CODE */
-
-const code =
-"CAMPA" +
-user.id
-.replace(/-/g,"")
-.substring(0,6)
-.toUpperCase();
-
-document.getElementById("referralCode")
-.innerText=code;
+document.getElementById("referralCode").innerText=code;
 
 }
-
-
-/* CHECK LOGIN SESSION */
 
 async function checkSession(){
 
 try{
 
-const result =
-await supabaseClient.auth.getSession();
+const result=await supabaseClient.auth.getSession();
 
 if(result.data.session){
 
-loadUser(
-result.data.session.user
-);
+loadUser(result.data.session.user);
 
 }else{
 
-document.getElementById("auth")
-.style.display="flex";
-
-document.getElementById("mainApp")
-.style.display="none";
+document.getElementById("auth").style.display="flex";
+document.getElementById("mainApp").style.display="none";
 
 }
 
@@ -1622,34 +1508,23 @@ console.error(error);
 
 }
 
-
-/* LOGOUT */
-
 async function logoutUser(){
 
-const result =
-await supabaseClient.auth.signOut();
+const result=await supabaseClient.auth.signOut();
 
 if(result.error){
 
 alert(result.error.message);
-
 return;
 
 }
 
-document.getElementById("mainApp")
-.style.display="none";
-
-document.getElementById("auth")
-.style.display="flex";
+document.getElementById("mainApp").style.display="none";
+document.getElementById("auth").style.display="flex";
 
 showAuth("login");
 
 }
-
-
-/* PAGE NAVIGATION */
 
 function openPage(page){
 
@@ -1667,172 +1542,101 @@ const pages=[
 
 pages.forEach(function(id){
 
-const element =
-document.getElementById(id);
+const element=document.getElementById(id);
 
 if(element){
-
 element.classList.remove("active");
-
 }
 
 });
 
-const selected =
-document.getElementById(page);
+const selected=document.getElementById(page);
 
 if(selected){
-
 selected.classList.add("active");
-
 }
 
-document.querySelectorAll(
-".bottom-nav button"
-).forEach(function(button){
+document.querySelectorAll(".bottom-nav button")
+.forEach(function(button){
 
 button.classList.remove("active");
 
 });
 
-const nav =
-document.getElementById(
-"nav-" + page
-);
+const nav=document.getElementById("nav-"+page);
 
 if(nav){
-
 nav.classList.add("active");
-
 }
 
 window.scrollTo(0,0);
 
 }
 
-
-/* PLAN */
-
 function selectPlan(name,amount){
 
-alert(
-name +
-" selected — ₹" +
-amount +
-"."
-);
+alert(name+" selected — ₹"+amount+".");
 
 }
 
-
-/* DEPOSIT */
-
 function submitDeposit(){
 
-const amount =
-document.getElementById(
-"depositAmount"
-).value;
+const amount=document.getElementById("depositAmount").value;
 
-if(!amount ||
-Number(amount)<=0){
+if(!amount||Number(amount)<=0){
 
-alert(
-"Please enter a valid amount."
-);
-
+alert("Please enter a valid amount.");
 return;
 
 }
 
-alert(
-"Deposit request for ₹" +
-amount +
-" received."
-);
+alert("Deposit request for ₹"+amount+" received.");
 
 }
 
-
-/* WITHDRAW */
-
 function submitWithdraw(){
 
-const amount =
-document.getElementById(
-"withdrawAmount"
-).value;
+const amount=document.getElementById("withdrawAmount").value;
+const account=document.getElementById("withdrawAccount").value.trim();
 
-const account =
-document.getElementById(
-"withdrawAccount"
-).value.trim();
+if(!amount||Number(amount)<=0){
 
-if(!amount ||
-Number(amount)<=0){
-
-alert(
-"Please enter a valid amount."
-);
-
+alert("Please enter a valid amount.");
 return;
 
 }
 
 if(!account){
 
-alert(
-"Please enter your UPI ID or account."
-);
-
+alert("Please enter your UPI ID or account.");
 return;
 
 }
 
-alert(
-"Withdrawal request for ₹" +
-amount +
-" received."
-);
+alert("Withdrawal request for ₹"+amount+" received.");
 
 }
 
-
-/* REFERRAL SHARE */
-
 async function shareReferral(){
 
-const code =
-document.getElementById(
-"referralCode"
-).innerText;
+const code=document.getElementById("referralCode").innerText;
 
-const text =
-"Join CAMPA using my referral code: " +
-code;
+const text="Join CAMPA using my referral code: "+code;
 
 try{
 
 if(navigator.share){
 
 await navigator.share({
-
 title:"CAMPA Referral",
-
 text:text
-
 });
 
-}else if(
-navigator.clipboard
-){
+}else if(navigator.clipboard){
 
-await navigator.clipboard
-.writeText(text);
+await navigator.clipboard.writeText(text);
 
-alert(
-"Referral code copied!"
-);
+alert("Referral code copied!");
 
 }else{
 
@@ -1848,9 +1652,91 @@ console.log(error);
 
 }
 
-
-/* START */
-
 checkSession();
 
 </script>
+
+ </div>
+
+<div id="modal" style="
+display:none;
+position:fixed;
+inset:0;
+background:#0008;
+z-index:999;
+align-items:flex-end;
+justify-content:center;
+">
+
+<div style="
+width:min(480px,100%);
+background:#fff;
+border-radius:25px 25px 0 0;
+padding:25px;
+">
+
+<h2 id="modalTitle">
+CAMPA
+</h2>
+
+<p id="modalText" style="
+font-size:12px;
+color:#777;
+line-height:1.5;
+margin:10px 0 20px;
+">
+</p>
+
+<button
+onclick="closeModal()"
+style="
+width:100%;
+padding:13px;
+border:0;
+border-radius:11px;
+background:#eeeaf3;
+font-weight:bold;
+">
+Close
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function closeModal(){
+
+const modal =
+document.getElementById("modal");
+
+if(modal){
+modal.style.display="none";
+}
+
+}
+
+function openModal(title,text){
+
+document.getElementById("modalTitle")
+.innerText=title;
+
+document.getElementById("modalText")
+.innerText=text;
+
+document.getElementById("modal")
+.style.display="flex";
+
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
