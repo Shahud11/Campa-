@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>CAMPA Admin Panel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f6f3fa;
+color:#27212d;
+padding-bottom:30px;
+}
+
+.container{
+width:min(1100px,94%);
+margin:auto;
+}
+
+header{
+background:linear-gradient(135deg,#5511b2,#963ce5);
+color:white;
+padding:22px 0;
+margin-bottom:20px;
+}
+
+.header-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+}
+
+h1{
+font-size:22px;
+}
+
+.subtitle{
+font-size:11px;
+opacity:.8;
+margin-top:5px;
+}
+
+button{
+border:0;
+cursor:pointer;
+font-weight:bold;
+}
+
+.logout{
+background:#fff;
+color:#6819c2;
+padding:10px 15px;
+border-radius:10px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:20px;
+}
+
+.card{
+background:#fff;
+border:1px solid #e8e1ef;
+border-radius:16px;
+padding:18px;
+}
+
+.card small{
+font-size:10px;
+color:#91899a;
+}
+
+.card h2{
+font-size:25px;
+margin-top:8px;
+color:#6819c2;
+}
+
+.panel{
+background:#fff;
+border:1px solid #e8e1ef;
+border-radius:16px;
+padding:18px;
+margin-bottom:18px;
+overflow-x:auto;
+}
+
+.panel-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.panel-head h2{
+font-size:17px;
+}
+
+.refresh{
+background:#6819c2;
+color:#fff;
+padding:9px 13px;
+border-radius:9px;
+font-size:11px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+}
+
+th{
+text-align:left;
+font-size:10px;
+color:#8d8496;
+padding:10px;
+border-bottom:1px solid #eee;
+}
+
+td{
+font-size:11px;
+padding:12px 10px;
+border-bottom:1px solid #f0edf3;
+}
+
+.status{
+display:inline-block;
+padding:5px 8px;
+border-radius:7px;
+font-size:9px;
+font-weight:bold;
+}
+
+.pending{
+background:#fff2d8;
+color:#9a6800;
+}
+
+.approved{
+background:#e6f8ed;
+color:#168548;
+}
+
+.rejected{
+background:#ffe8e8;
+color:#c33;
+}
+
+.action{
+padding:7px 9px;
+border-radius:7px;
+font-size:9px;
+margin:2px;
+}
+
+.approve{
+background:#168548;
+color:white;
+}
+
+.reject{
+background:#d33;
+color:white;
+}
+
+.empty{
+text-align:center;
+padding:25px;
+color:#999;
+font-size:12px;
+}
+
+#loading{
+text-align:center;
+padding:50px;
+color:#777;
+}
+
+#errorBox{
+display:none;
+background:#ffe8e8;
+color:#b42323;
+padding:14px;
+border-radius:10px;
+margin-bottom:15px;
+font-size:12px;
+}
+
+@media(max-width:700px){
+
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.header-row{
+align-items:flex-start;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loading">
+Checking admin access...
+</div>
+
+<div id="app" style="display:none;">
+
+<header>
+
+<div class="container">
+
+<div class="header-row">
+
+<div>
+
+<h1>CAMPA Admin</h1>
+
+<div class="subtitle">
+Management & Withdrawal Control
+</div>
+
+</div>
+
+<button
+class="logout"
+onclick="logoutAdmin()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<div id="errorBox"></div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<small>TOTAL USERS</small>
+
+<h2 id="totalUsers">0</h2>
+
+</div>
+
+<div class="card">
+
+<small>PENDING WITHDRAWALS</small>
+
+<h2 id="pendingWithdrawals">0</h2>
+
+</div>
+
+<div class="card">
+
+<small>APPROVED</small>
+
+<h2 id="approvedWithdrawals">0</h2>
+
+</div>
+
+<div class="card">
+
+<small>REJECTED</small>
+
+<h2 id="rejectedWithdrawals">0</h2>
+
+</div>
+
+</div>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>Withdrawal Requests</h2>
+
+<button
+class="refresh"
+onclick="loadWithdrawals()">
+Refresh
+</button>
+
+</div>
+
+<div id="withdrawalTable">
+
+<div class="empty">
+Loading withdrawals...
+</div>
+
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>Users</h2>
+
+<button
+class="refresh"
+onclick="loadUsers()">
+Refresh
+</button>
+
+</div>
+
+<div id="usersTable">
+
+<div class="empty">
+Loading users...
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* SUPABASE */
+
+const SUPABASE_URL =
+"https://tkpanotfjfiabjjznkxq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_g1W2F-S5qfcd7Etk22UBsQ_WEN6OvT4";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* ERROR */
+
+function showError(message){
+
+const box =
+document.getElementById("errorBox");
+
+box.innerText=message;
+
+box.style.display="block";
+
+}
+
+
+/* ADMIN CHECK */
+
+async function checkAdmin(){
+
+try{
+
+const result =
+await supabaseClient.auth.getSession();
+
+const session =
+result.data.session;
+
+if(!session){
+
+window.location.href="index.html";
+
+return;
+
+}
+
+const profileResult =
+await supabaseClient
+.from("profiles")
+.select("is_admin,full_name")
+.eq("id",session.user.id)
+.single();
+
+if(profileResult.error){
+
+showError(
+"Admin profile could not be loaded."
+);
+
+return;
+
+}
+
+if(!profileResult.data.is_admin){
+
+document.body.innerHTML=`
+
+<div style="
+min-height:100vh;
+display:grid;
+place-items:center;
+padding:25px;
+text-align:center;
+">
+
+<div>
+
+<h2>Access Denied</h2>
+
+<p style="
+margin:10px 0 20px;
+color:#777;
+font-size:13px;
+">
+You do not have administrator access.
+</p>
+
+<button
+onclick="location.href='index.html'"
+style="
+padding:12px 20px;
+border:0;
+border-radius:10px;
+background:#6819c2;
+color:#fff;
+font-weight:bold;
+">
+Back to CAMPA
+</button>
+
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
+document.getElementById("loading")
+.style.display="none";
+
+document.getElementById("app")
+.style.display="block";
+
+await loadWithdrawals();
+
+await loadUsers();
+
+}catch(error){
+
+console.error(error);
+
+showError(
+"Something went wrong while checking admin access."
+);
+
+}
+
+}
+
+
+/* LOAD WITHDRAWALS */
+
+async function loadWithdrawals(){
+
+const box =
+document.getElementById("withdrawalTable");
+
+box.innerHTML=
+'<div class="empty">Loading...</div>';
+
+const result =
+await supabaseClient
+.from("withdrawals")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(result.error){
+
+console.error(result.error);
+
+showError(result.error.message);
+
+box.innerHTML=
+'<div class="empty">Could not load withdrawals.</div>';
+
+return;
+
+}
+
+const rows=result.data||[];
+
+updateWithdrawalStats(rows);
+
+if(rows.length===0){
+
+box.innerHTML=
+'<div class="empty">No withdrawal requests yet.</div>';
+
+return;
+
+}
+
+let html=`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>USER ID</th>
+<th>AMOUNT</th>
+<th>METHOD</th>
+<th>ACCOUNT</th>
+<th>STATUS</th>
+<th>DATE</th>
+<th>ACTION</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+rows.forEach(function(row){
+
+const status=
+(row.status||"pending").toLowerCase();
+
+html+=`
+
+<tr>
+
+<td>${escapeHtml(
+String(row.user_id).substring(0,8)
+)}...</td>
+
+<td>₹${Number(row.amount||0).toFixed(2)}</td>
+
+<td>${escapeHtml(row.method||"-")}</td>
+
+<td>${escapeHtml(
+row.account_details||"-"
+)}</td>
+
+<td>
+
+<span class="status ${status}">
+${escapeHtml(status)}
+</span>
+
+</td>
+
+<td>
+${new Date(row.created_at)
+.toLocaleString()}
+</td>
+
+<td>
+
+${
+status==="pending"
+?
+`
+
+<button
+class="action approve"
+onclick="updateWithdrawal(${row.id},'approved')">
+Approve
+</button>
+
+<button
+class="action reject"
+onclick="updateWithdrawal(${row.id},'rejected')">
+Reject
+</button>
+
+`
+:
+"-"
+}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+html+=`
+
+</tbody>
+
+</table>
+`;
+
+box.innerHTML=html;
+
+}
+
+
+/* UPDATE WITHDRAWAL */
+
+async function updateWithdrawal(id,status){
+
+const message =
+status==="approved"
+?
+"Approve this withdrawal request?"
+:
+"Reject this withdrawal request?";
+
+if(!confirm(message)){
+
+return;
+
+}
+
+const result =
+await supabaseClient
+.from("withdrawals")
+.update({
+status:status
+})
+.eq("id",id);
+
+if(result.error){
+
+alert(
+"Update failed: "+
+result.error.message
+);
+
+return;
+
+}
+
+alert(
+"Withdrawal marked as "+
+status+"."
+);
+
+await loadWithdrawals();
+
+}
+
+
+/* STATS */
+
+function updateWithdrawalStats(rows){
+
+let pending=0;
+let approved=0;
+let rejected=0;
+
+rows.forEach(function(row){
+
+const status=
+(row.status||"pending").toLowerCase();
+
+if(status==="pending") pending++;
+
+if(status==="approved") approved++;
+
+if(status==="rejected") rejected++;
+
+});
+
+document.getElementById(
+"pendingWithdrawals"
+).innerText=pending;
+
+document.getElementById(
+"approvedWithdrawals"
+).innerText=approved;
+
+document.getElementById(
+"rejectedWithdrawals"
+).innerText=rejected;
+
+}
+
+
+/* USERS */
+
+async function loadUsers(){
+
+const box=
+document.getElementById("usersTable");
+
+box.innerHTML=
+'<div class="empty">Loading...</div>';
+
+const result =
+await supabaseClient
+.from("profiles")
+.select("id,full_name,balance,referral_code,created_at")
+.order("created_at",{ascending:false});
+
+if(result.error){
+
+console.error(result.error);
+
+showError(result.error.message);
+
+box.innerHTML=
+'<div class="empty">Could not load users.</div>';
+
+return;
+
+}
+
+const rows=result.data||[];
+
+document.getElementById(
+"totalUsers"
+).innerText=rows.length;
+
+if(rows.length===0){
+
+box.innerHTML=
+'<div class="empty">No profiles found.</div>';
+
+return;
+
+}
+
+let html=`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>NAME</th>
+<th>USER ID</th>
+<th>BALANCE</th>
+<th>REFERRAL CODE</th>
+<th>JOINED</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+rows.forEach(function(row){
+
+html+=`
+
+<tr>
+
+<td>
+${escapeHtml(row.full_name||"User")}
+</td>
+
+<td>
+${escapeHtml(
+String(row.id).substring(0,8)
+)}...
+</td>
+
+<td>
+₹${Number(row.balance||0).toFixed(2)}
+</td>
+
+<td>
+${escapeHtml(
+row.referral_code||"-"
+)}
+</td>
+
+<td>
+${new Date(row.created_at)
+.toLocaleString()}
+</td>
+
+</tr>
+
+`;
+
+});
+
+html+=`
+
+</tbody>
+
+</table>
+`;
+
+box.innerHTML=html;
+
+}
+
+
+/* LOGOUT */
+
+async function logoutAdmin(){
+
+await supabaseClient.auth.signOut();
+
+window.location.href="index.html";
+
+}
+
+
+/* HTML SECURITY */
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
+checkAdmin();
+
+</script>
+
+</body>
+
+  </html>
